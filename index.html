@@ -3,275 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nguyễn Hữu Thành | Arch Linux User</title>
+    <title>Nguyễn Hữu Thành | Personal Bio</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Font chữ Monospace chuẩn Terminal -->
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --bg-dark: #0f141d;
-            --card-bg: rgba(23, 30, 44, 0.85);
-            --arch-blue: #1793d1;
-            --arch-cyan: #33aadd;
-            --text-main: #f8fafc;
-            --text-sub: #94a3b8;
-        }
-
-        body {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            background-color: var(--bg-dark);
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            color: var(--text-main);
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        /* Nền tối giản họa tiết chấm tinh tế */
-        .bg-pattern {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: radial-gradient(rgba(23, 147, 209, 0.15) 1px, transparent 1px);
-            background-size: 24px 24px;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        /* Card chính */
-        .bio-card {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            max-width: 400px;
-            background: var(--card-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(23, 147, 209, 0.25);
-            border-radius: 20px;
-            padding: 36px 24px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6),
-                        0 0 20px rgba(23, 147, 209, 0.15);
-        }
-
-        /* Avatar Container */
-        .avatar-box {
-            position: relative;
-            width: 110px;
-            height: 110px;
-            margin: 0 auto 18px auto;
-        }
-
-        .avatar-img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--arch-cyan);
-            box-shadow: 0 0 15px rgba(23, 147, 209, 0.4);
-        }
-
-        /* Logo Arch Linux gắn nhỏ bên cạnh avatar */
-        .arch-badge {
-            position: absolute;
-            bottom: 2px;
-            right: 2px;
-            width: 28px;
-            height: 28px;
-            background: #0f141d;
-            border: 1.5px solid var(--arch-cyan);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--arch-cyan);
-            font-size: 13px;
-        }
-
-        /* Phần Header Tên & Linux Command */
-        .profile-header {
-            text-align: center;
-            margin-bottom: 26px;
-        }
-
-        .name {
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: -0.3px;
-            margin-bottom: 8px;
-            color: #ffffff;
-        }
-
-        /* Khung Terminal Command mang đậm chất Arch */
-        .arch-prompt {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(15, 20, 29, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 13px;
-        }
-
-        .user-host {
-            color: var(--arch-cyan);
-            font-weight: 600;
-        }
-
-        .prompt-symbol {
-            color: #f43f5e;
-        }
-
-        .command-text {
-            color: #e2e8f0;
-        }
-
-        /* Danh sách các nút liên kết */
-        .links-flex {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .btn-link {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 18px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            color: var(--text-main);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 15px;
-            transition: all 0.2s ease;
-        }
-
-        .btn-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .btn-link i.fa-brands, .btn-link i.fa-solid {
-            font-size: 18px;
-            width: 22px;
-            text-align: center;
-        }
-
-        .arrow-icon {
-            font-size: 12px;
-            color: var(--text-sub);
-            transition: transform 0.2s ease;
-        }
-
-        /* Hover hiệu ứng tinh tế */
-        .btn-link:hover {
-            transform: translateX(4px);
-            background: rgba(23, 147, 209, 0.12);
-            border-color: rgba(23, 147, 209, 0.4);
-        }
-
-        .btn-link:hover .arrow-icon {
-            transform: translateX(3px);
-            color: var(--arch-cyan);
-        }
-
-        /* Footer */
-        footer {
-            margin-top: 26px;
-            text-align: center;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            color: var(--text-sub);
-        }
-
-        footer span {
-            color: var(--arch-cyan);
-        }
-    </style>
+    <!-- Google Fonts Premium -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Nhúng File CSS Riêng -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="bg-pattern"></div>
+    <!-- Đốm sáng Neon trang trí nền -->
+    <div class="light-orb orb-1"></div>
+    <div class="light-orb orb-2"></div>
+    <div class="light-orb orb-3"></div>
 
-    <main class="bio-card">
-        <!-- Avatar + Icon Arch -->
-        <div class="avatar-box">
+    <main class="master-card">
+        <!-- Khung Avatar Phát Sáng -->
+        <div class="avatar-wrapper">
+            <div class="avatar-ring"></div>
             <img src="myfaceplsdontbully.jpg" alt="Nguyễn Hữu Thành" class="avatar-img">
-            <div class="arch-badge" title="Arch Linux User">
-                <i class="fab fa-linux"></i>
-            </div>
         </div>
 
-        <!-- Tên & Terminal prompt -->
-        <div class="profile-header">
-            <h1 class="name">Nguyễn Hữu Thành</h1>
-            <div class="arch-prompt">
-                <span class="user-host">thanh@archlinux</span><span class="prompt-symbol">:~$</span>
-                <span class="command-text">neofetch</span>
-            </div>
-        </div>
+        <!-- Tên Cá Nhân -->
+        <h1 class="name">Nguyễn Hữu Thành</h1>
 
-        <!-- Danh sách các nút liên kết mạng xã hội -->
-        <div class="links-flex">
+        <!-- Danh Sách Các Nút Liên Kết Mạng Xã Hội -->
+        <div class="links-group">
 
             <!-- Facebook -->
-            <a href="https://www.facebook.com/share/1EoYm2aMis/" target="_blank" class="btn-link">
-                <div class="btn-left">
-                    <i class="fab fa-facebook" style="color: #1877f2;"></i>
-                    <span>Facebook</span>
+            <a href="https://www.facebook.com/share/1EoYm2aMis/" target="_blank" class="btn-card btn-fb">
+                <div class="btn-inner">
+                    <div class="icon-box">
+                        <i class="fab fa-facebook-f"></i>
+                    </div>
+                    <span class="btn-text">Facebook</span>
                 </div>
-                <i class="fas fa-chevron-right arrow-icon"></i>
+                <div class="btn-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
             </a>
 
             <!-- TikTok -->
-            <a href="https://www.tiktok.com/@thanusearch?_r=1&_t=ZS-99h5tcZfva4" target="_blank" class="btn-link">
-                <div class="btn-left">
-                    <i class="fab fa-tiktok" style="color: #ffffff;"></i>
-                    <span>TikTok</span>
+            <a href="https://www.tiktok.com/@thanusearch?_r=1&_t=ZS-99h5tcZfva4" target="_blank" class="btn-card btn-tt">
+                <div class="btn-inner">
+                    <div class="icon-box">
+                        <i class="fab fa-tiktok"></i>
+                    </div>
+                    <span class="btn-text">TikTok</span>
                 </div>
-                <i class="fas fa-chevron-right arrow-icon"></i>
+                <div class="btn-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
             </a>
 
             <!-- Discord -->
-            <a href="https://discord.com" target="_blank" class="btn-link">
-                <div class="btn-left">
-                    <i class="fab fa-discord" style="color: #5865f2;"></i>
-                    <span>Discord</span>
+            <a href="https://discord.com" target="_blank" class="btn-card btn-dc">
+                <div class="btn-inner">
+                    <div class="icon-box">
+                        <i class="fab fa-discord"></i>
+                    </div>
+                    <span class="btn-text">Discord</span>
                 </div>
-                <i class="fas fa-chevron-right arrow-icon"></i>
+                <div class="btn-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
             </a>
 
             <!-- Email -->
-            <a href="mailto:nguyenhuuthanh06061995@gmail.com" class="btn-link">
-                <div class="btn-left">
-                    <i class="fas fa-envelope" style="color: #ea4335;"></i>
-                    <span>Email</span>
+            <a href="mailto:nguyenhuuthanh06061995@gmail.com" class="btn-card btn-em">
+                <div class="btn-inner">
+                    <div class="icon-box">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <span class="btn-text">Email</span>
                 </div>
-                <i class="fas fa-chevron-right arrow-icon"></i>
+                <div class="btn-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
             </a>
 
         </div>
 
-        <!-- Footer tối giản -->
+        <!-- Footer -->
         <footer>
-            <span>btw, i use arch</span>
+            © 2026 Nguyễn Hữu Thành
         </footer>
     </main>
 
