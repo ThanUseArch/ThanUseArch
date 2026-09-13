@@ -7,20 +7,20 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Space+Grotesk:wght@500;700&family=Fira+Code:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Grotesk:wght@600;700&family=Fira+Code:wght@700&display=swap" rel="stylesheet">
     <!-- File CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Canvas Nền Hoa Anh Đào Rơi -->
+    <!-- Canvas Nền Hoa Anh Đào Rơi & Hạt Sáng -->
     <canvas id="sakura-canvas"></canvas>
 
     <!-- Khung Bio Card Chính -->
     <div class="master-card-container">
         <main class="master-card">
             
-            <!-- Avatar với Viền Xoay Chuyển Động -->
+            <!-- Avatar với Viền Xoay Chuyển Động Pastels -->
             <div class="avatar-box">
                 <div class="avatar-spin-glow"></div>
                 <img src="myfaceplsdontbully.jpg" alt="Nguyễn Hữu Thành" class="avatar-img">
@@ -78,15 +78,17 @@
 
             </div>
 
-            <!-- Ô Chứa ASCII Art Rộng Thoải Mái -->
+            <!-- Ô Chứa ASCII Art Rộng Rãi -->
             <div class="ascii-wrapper">
 <pre class="ascii-art">
- _                      _     _ _ _        
-(_)                    | |   | | | |       
- _   _  _ ___  ___  __ _| |__ | | |_  _ _ _
-| | | || / __|/ _ \/ _` | '__|| | __|| | | |
-| | | || \__ \  __/ (_| | |   | | |_ | | | |
-|_| |_||_|___/\___|\__,_|_|   |_|\__| \__'_|
+  _                                   _       _     _            
+ (_)                                 | |     | |   | |           
+  _   _   _ ___  ___    __ _ _ __ ___| |__   | |__ | |___      __
+ | | | | | / __|/ _ \  / _` | '__/ __| '_ \  | '_ \| __\ \ /\ / /
+ | | | |_| \__ \  __/ | (_| | | | (__| | | | | |_) | |_ \ V  V / 
+ |_|  \__,_|___/\___|  \__,_|_|  \___|_| |_| |_.__/ \__| \_/\_/  
+                                                                 
+                                                                 
 </pre>
             </div>
 
@@ -101,7 +103,7 @@
     <script>
         const canvas = document.getElementById('sakura-canvas');
         const ctx = canvas.getContext('2d');
-        let petals = [];
+        let elements = [];
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
@@ -113,23 +115,23 @@
         class Petal {
             constructor() {
                 this.reset();
-                this.y = Math.random() * canvas.height; // Cho rải rác đều ngay từ đầu
+                this.y = Math.random() * canvas.height;
             }
 
             reset() {
                 this.x = Math.random() * canvas.width;
                 this.y = -20;
                 this.size = Math.random() * 8 + 6;
-                this.speedY = Math.random() * 1.2 + 0.8;
+                this.speedY = Math.random() * 1.2 + 0.6;
                 this.speedX = Math.random() * 1 - 0.5;
                 this.angle = Math.random() * 360;
                 this.spin = (Math.random() - 0.5) * 0.03;
-                this.opacity = Math.random() * 0.5 + 0.4;
+                this.opacity = Math.random() * 0.6 + 0.3;
             }
 
             update() {
                 this.y += this.speedY;
-                this.x += Math.sin(this.y * 0.01) + this.speedX;
+                this.x += Math.sin(this.y * 0.008) + this.speedX;
                 this.angle += this.spin;
 
                 if (this.y > canvas.height + 20) {
@@ -142,30 +144,28 @@
                 ctx.translate(this.x, this.y);
                 ctx.rotate(this.angle);
                 ctx.beginPath();
-                
-                // Vẽ Cánh Hoa Anh Đào mềm mại
                 ctx.moveTo(0, 0);
                 ctx.bezierCurveTo(-this.size, -this.size / 2, -this.size, this.size, 0, this.size * 1.5);
                 ctx.bezierCurveTo(this.size, this.size, this.size, -this.size / 2, 0, 0);
                 
-                ctx.fillStyle = `rgba(255, 183, 197, ${this.opacity})`;
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
                 ctx.fill();
                 ctx.restore();
             }
         }
 
         function initSakura() {
-            petals = [];
-            const count = Math.floor(window.innerWidth / 18);
+            elements = [];
+            const count = Math.floor(window.innerWidth / 16);
             for (let i = 0; i < count; i++) {
-                petals.push(new Petal());
+                elements.push(new Petal());
             }
         }
         initSakura();
 
         function animateSakura() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            petals.forEach(p => {
+            elements.forEach(p => {
                 p.update();
                 p.draw();
             });
