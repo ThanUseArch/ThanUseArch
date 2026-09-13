@@ -3,93 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nguyễn Hữu Thành | Personal Bio</title>
+    <title>Nguyễn Hữu Thành | Master Portfolio</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts Premium -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Google Fonts Premium & Monospace cho ASCII -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <!-- Nhúng File CSS Riêng -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Đốm sáng Neon trang trí nền -->
-    <div class="light-orb orb-1"></div>
-    <div class="light-orb orb-2"></div>
-    <div class="light-orb orb-3"></div>
+    <!-- Canvas Hạt Sao Chuyển Động Nền -->
+    <canvas id="particle-canvas"></canvas>
 
-    <main class="master-card">
-        <!-- Khung Avatar Phát Sáng -->
-        <div class="avatar-wrapper">
-            <div class="avatar-ring"></div>
-            <img src="myfaceplsdontbully.jpg" alt="Nguyễn Hữu Thành" class="avatar-img">
-        </div>
+    <!-- Quầng Sáng Ambient Neon Nền -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="ambient-glow glow-3"></div>
 
-        <!-- Tên Cá Nhân -->
-        <h1 class="name">Nguyễn Hữu Thành</h1>
+    <!-- Lưới Cyber Virtual Nền -->
+    <div class="cyber-grid"></div>
 
-        <!-- Danh Sách Các Nút Liên Kết Mạng Xã Hội -->
-        <div class="links-group">
+    <!-- Khung Bio Card Chính -->
+    <div class="master-card-container" id="cardContainer">
+        <main class="master-card">
+            
+            <!-- Avatar Phát Sáng -->
+            <div class="avatar-box">
+                <div class="avatar-glow"></div>
+                <img src="myfaceplsdontbully.jpg" alt="Nguyễn Hữu Thành" class="avatar-img">
+            </div>
 
-            <!-- Facebook -->
-            <a href="https://www.facebook.com/share/1EoYm2aMis/" target="_blank" class="btn-card btn-fb">
-                <div class="btn-inner">
-                    <div class="icon-box">
-                        <i class="fab fa-facebook-f"></i>
+            <!-- Tên Cá Nhân -->
+            <h1 class="name">Nguyễn Hữu Thành</h1>
+
+            <!-- Các Nút Liên Kết Mạng Xã Hội -->
+            <div class="links-flex">
+
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/share/1EoYm2aMis/" target="_blank" class="btn-link btn-fb">
+                    <div class="btn-left">
+                        <div class="icon-box">
+                            <i class="fab fa-facebook-f"></i>
+                        </div>
+                        <span class="btn-text">Facebook</span>
                     </div>
-                    <span class="btn-text">Facebook</span>
-                </div>
-                <div class="btn-arrow">
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-            </a>
+                    <i class="fas fa-arrow-right arrow-icon"></i>
+                </a>
 
-            <!-- TikTok -->
-            <a href="https://www.tiktok.com/@thanusearch?_r=1&_t=ZS-99h5tcZfva4" target="_blank" class="btn-card btn-tt">
-                <div class="btn-inner">
-                    <div class="icon-box">
-                        <i class="fab fa-tiktok"></i>
+                <!-- TikTok -->
+                <a href="https://www.tiktok.com/@thanusearch?_r=1&_t=ZS-99h5tcZfva4" target="_blank" class="btn-link btn-tt">
+                    <div class="btn-left">
+                        <div class="icon-box">
+                            <i class="fab fa-tiktok"></i>
+                        </div>
+                        <span class="btn-text">TikTok</span>
                     </div>
-                    <span class="btn-text">TikTok</span>
-                </div>
-                <div class="btn-arrow">
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-            </a>
+                    <i class="fas fa-arrow-right arrow-icon"></i>
+                </a>
 
-            <!-- Discord -->
-            <a href="https://discord.com" target="_blank" class="btn-card btn-dc">
-                <div class="btn-inner">
-                    <div class="icon-box">
-                        <i class="fab fa-discord"></i>
+                <!-- Discord -->
+                <a href="https://discord.com" target="_blank" class="btn-link btn-dc">
+                    <div class="btn-left">
+                        <div class="icon-box">
+                            <i class="fab fa-discord"></i>
+                        </div>
+                        <span class="btn-text">Discord</span>
                     </div>
-                    <span class="btn-text">Discord</span>
-                </div>
-                <div class="btn-arrow">
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-            </a>
+                    <i class="fas fa-arrow-right arrow-icon"></i>
+                </a>
 
-            <!-- Email -->
-            <a href="mailto:nguyenhuuthanh06061995@gmail.com" class="btn-card btn-em">
-                <div class="btn-inner">
-                    <div class="icon-box">
-                        <i class="fas fa-envelope"></i>
+                <!-- Email -->
+                <a href="mailto:nguyenhuuthanh06061995@gmail.com" class="btn-link btn-em">
+                    <div class="btn-left">
+                        <div class="icon-box">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <span class="btn-text">Email</span>
                     </div>
-                    <span class="btn-text">Email</span>
-                </div>
-                <div class="btn-arrow">
-                    <i class="fas fa-arrow-right"></i>
-                </div>
-            </a>
+                    <i class="fas fa-arrow-right arrow-icon"></i>
+                </a>
 
-        </div>
+            </div>
 
-        <!-- Footer -->
-        <footer>
-            © 2026 Nguyễn Hữu Thành
-        </footer>
-    </main>
+            <!-- Chữ ASCII Art "i use arch btw" 3D -->
+            <div class="ascii-wrapper">
+<pre class="ascii-art">
+ _                      _     _ _ _        
+(_)                    | |   | | | |       
+ _   _  _ ___  ___  __ _| |__ | | |_  _ _ _
+| | | || / __|/ _ \/ _` | '__|| | __|| | | |
+| | | || \__ \  __/ (_| | |   | | |_ | | | |
+|_| |_||_|___/\___|\__,_|_|   |_|\__| \__'_|
+</pre>
+            </div>
 
+            <!-- Footer -->
+            <footer>
+                © 2026 NGUYỄN HỮU THÀNH
+            </footer>
+        </main>
+    </div>
+
+    <!-- Script Hiệu Ứng Nền & Nghiêng Card 3D -->
+    <script>
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+            draw() {
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < 75; i++) {
+                particles.push(new Particle());
+            }
+        }
+        initParticles();
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        const cardContainer = document.getElementById('cardContainer');
+        document.addEventListener('mousemove', (e) => {
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+            cardContainer.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+    </script>
 </body>
 </html>
