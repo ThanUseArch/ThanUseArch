@@ -10,86 +10,126 @@ body {
     justify-content: center;
     align-items: center;
     padding: 24px 16px;
-    background-color: #0b0f19;
+    background-color: #060913;
     font-family: 'Plus Jakarta Sans', sans-serif;
     color: #ffffff;
     position: relative;
     overflow-x: hidden;
 }
 
-/* Đốm sáng Neon chuyền động 3D */
-.light-orb {
+/* Canvas hiệu ứng hạt sao chuyển động */
+#particle-canvas {
     position: fixed;
-    border-radius: 50%;
-    filter: blur(100px);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.6;
 }
 
-.orb-1 {
+/* Quầng sáng Neon Nền sống động */
+.ambient-glow {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(120px);
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.55;
+    animation: pulse-glow 10s ease-in-out infinite alternate;
+}
+
+.glow-1 {
+    width: 450px;
+    height: 450px;
+    top: -100px;
+    left: -100px;
+    background: radial-gradient(circle, #00f2fe 0%, #4facfe 100%);
+}
+
+.glow-2 {
+    width: 500px;
+    height: 500px;
+    bottom: -150px;
+    right: -150px;
+    background: radial-gradient(circle, #ff0844 0%, #ffb199 100%);
+}
+
+.glow-3 {
     width: 350px;
     height: 350px;
-    top: -80px;
-    left: -80px;
-    background: linear-gradient(135deg, #00d2ff, #3a7bd5);
-}
-
-.orb-2 {
-    width: 380px;
-    height: 380px;
-    bottom: -100px;
-    right: -100px;
-    background: linear-gradient(135deg, #f72585, #7209b7);
-}
-
-.orb-3 {
-    width: 250px;
-    height: 250px;
-    top: 40%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: linear-gradient(135deg, #4cc9f0, #4361ee);
+    background: radial-gradient(circle, #7f00ff 0%, #e100ff 100%);
     opacity: 0.25;
 }
 
-/* Card Chính Glassmorphism Đỉnh Cao */
-.master-card {
+@keyframes pulse-glow {
+    0% { transform: scale(1) translate(0, 0); }
+    100% { transform: scale(1.15) translate(20px, -20px); }
+}
+
+/* Họa tiết Lưới Cyber Space làm nền đầy đặn */
+.cyber-grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Master Bio Card với hiệu ứng Viền Đa Sắc phát sáng */
+.master-card-container {
     position: relative;
     z-index: 1;
     width: 100%;
-    max-width: 410px;
-    background: rgba(18, 24, 38, 0.65);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 28px;
-    padding: 44px 28px 32px 28px;
-    text-align: center;
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5),
-                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    max-width: 440px;
+    padding: 2px;
+    border-radius: 30px;
+    background: linear-gradient(135deg, rgba(0,242,254,0.6), rgba(127,0,255,0.4), rgba(255,8,68,0.6));
+    box-shadow: 0 0 50px rgba(0, 242, 254, 0.25),
+                0 25px 60px rgba(0, 0, 0, 0.8);
+    transition: transform 0.2s ease-out;
 }
 
-/* Khung Avatar */
-.avatar-wrapper {
+.master-card {
+    background: rgba(10, 14, 26, 0.85);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border-radius: 28px;
+    padding: 42px 24px 28px 24px;
+    text-align: center;
+}
+
+/* Avatar Hologram phát sáng */
+.avatar-box {
     position: relative;
     width: 120px;
     height: 120px;
-    margin: 0 auto 24px auto;
+    margin: 0 auto 20px auto;
 }
 
-.avatar-ring {
+.avatar-glow {
     position: absolute;
-    inset: -4px;
+    inset: -6px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #00d2ff, #9d4edd, #f72585);
-    animation: spin 8s linear infinite;
-    filter: blur(4px);
+    background: linear-gradient(45deg, #00f2fe, #4facfe, #00c6ff, #00f2fe);
+    background-size: 400% 400%;
+    animation: gradient-rotate 4s linear infinite;
+    filter: blur(8px);
 }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+@keyframes gradient-rotate {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .avatar-img {
@@ -99,45 +139,64 @@ body {
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid #0b0f19;
+    border: 3px solid #060913;
 }
 
 /* Tên Cá Nhân */
 .name {
-    font-size: 26px;
-    font-weight: 800;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
     letter-spacing: -0.5px;
-    margin-bottom: 32px;
-    background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+    margin-bottom: 26px;
+    background: linear-gradient(180deg, #ffffff 30%, #a5b4fc 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    text-shadow: 0 4px 20px rgba(255,255,255,0.15);
 }
 
-/* Nhóm nút mạng xã hội */
-.links-group {
+/* Danh sách nút liên kết */
+.links-flex {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
 }
 
-.btn-card {
+.btn-link {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 20px;
-    background: rgba(255, 255, 255, 0.04);
+    padding: 15px 18px;
+    background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 18px;
     color: #ffffff;
     text-decoration: none;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.btn-inner {
+.btn-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    transition: left 0.6s ease;
+}
+
+.btn-link:hover::before {
+    left: 100%;
+}
+
+.btn-left {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
+    z-index: 1;
 }
 
 .icon-box {
@@ -147,51 +206,73 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
-    background: rgba(255, 255, 255, 0.06);
+    font-size: 18px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
 }
 
 .btn-text {
     font-weight: 700;
-    font-size: 16px;
-    letter-spacing: 0.2px;
+    font-size: 15px;
+    letter-spacing: 0.3px;
 }
 
-.btn-arrow {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.4);
+.arrow-icon {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.3);
     transition: all 0.3s ease;
+    z-index: 1;
 }
 
-/* Hover Hiệu Ứng Cao Cấp */
-.btn-card:hover {
-    transform: translateY(-3px) scale(1.01);
-    background: rgba(255, 255, 255, 0.08);
+.btn-link:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.07);
 }
 
-.btn-card:hover .btn-arrow {
-    transform: translateX(5px);
+.btn-link:hover .arrow-icon {
+    transform: translateX(4px);
     color: #ffffff;
 }
 
-/* Hover riêng theo từng ứng dụng */
-.btn-fb:hover { border-color: rgba(24, 119, 242, 0.6); box-shadow: 0 8px 25px rgba(24, 119, 242, 0.35); }
-.btn-fb:hover .icon-box { background: #1877f2; color: #fff; }
+/* Custom Hover từng nút */
+.btn-fb:hover { border-color: rgba(24, 119, 242, 0.6); box-shadow: 0 10px 30px rgba(24, 119, 242, 0.3); }
+.btn-fb:hover .icon-box { background: #1877f2; color: #ffffff; box-shadow: 0 0 15px rgba(24, 119, 242, 0.6); }
 
-.btn-tt:hover { border-color: rgba(255, 255, 255, 0.8); box-shadow: 0 8px 25px rgba(255, 255, 255, 0.25); }
-.btn-tt:hover .icon-box { background: #ffffff; color: #000; }
+.btn-tt:hover { border-color: rgba(255, 255, 255, 0.8); box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2); }
+.btn-tt:hover .icon-box { background: #ffffff; color: #000000; box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); }
 
-.btn-dc:hover { border-color: rgba(88, 101, 242, 0.6); box-shadow: 0 8px 25px rgba(88, 101, 242, 0.35); }
-.btn-dc:hover .icon-box { background: #5865f2; color: #fff; }
+.btn-dc:hover { border-color: rgba(88, 101, 242, 0.6); box-shadow: 0 10px 30px rgba(88, 101, 242, 0.3); }
+.btn-dc:hover .icon-box { background: #5865f2; color: #ffffff; box-shadow: 0 0 15px rgba(88, 101, 242, 0.6); }
 
-.btn-em:hover { border-color: rgba(234, 67, 53, 0.6); box-shadow: 0 8px 25px rgba(234, 67, 53, 0.35); }
-.btn-em:hover .icon-box { background: #ea4335; color: #fff; }
+.btn-em:hover { border-color: rgba(234, 67, 53, 0.6); box-shadow: 0 10px 30px rgba(234, 67, 53, 0.3); }
+.btn-em:hover .icon-box { background: #ea4335; color: #ffffff; box-shadow: 0 0 15px rgba(234, 67, 53, 0.6); }
+
+/* Chữ ASCII Art "i use arch btw" 3D */
+.ascii-wrapper {
+    margin-top: 24px;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px dashed rgba(23, 147, 209, 0.4);
+    border-radius: 14px;
+    overflow-x: auto;
+}
+
+.ascii-art {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    line-height: 1.1;
+    font-weight: bold;
+    color: #1793d1;
+    text-shadow: 0 0 8px rgba(23, 147, 209, 0.6);
+    display: inline-block;
+}
 
 /* Footer */
 footer {
-    margin-top: 32px;
-    font-size: 13px;
-    color: rgba(255, 255, 255, 0.4);
+    margin-top: 20px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.35);
     font-weight: 600;
+    letter-spacing: 1px;
 }
