@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nguyễn Hữu Thành | Senior Software Engineer Profile</title>
+    <title>Nguyễn Hữu Thành | Arch Linux User</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Inter & JetBrains Mono (Font chữ huyền thoại của Coder) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Font chữ Monospace chuẩn Terminal -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -16,14 +16,12 @@
         }
 
         :root {
-            --bg-dark: #090d16;
-            --card-bg: rgba(15, 23, 42, 0.75);
-            --accent-cyan: #38bdf8;
-            --accent-purple: #a855f7;
-            --accent-green: #22c55e;
+            --bg-dark: #0f141d;
+            --card-bg: rgba(23, 30, 44, 0.85);
+            --arch-blue: #1793d1;
+            --arch-cyan: #33aadd;
             --text-main: #f8fafc;
             --text-sub: #94a3b8;
-            --border-glow: rgba(56, 189, 248, 0.25);
         }
 
         body {
@@ -31,392 +29,249 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 24px 16px;
+            padding: 20px;
             background-color: var(--bg-dark);
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             color: var(--text-main);
             position: relative;
             overflow-x: hidden;
         }
 
-        /* Nền hiệu ứng Lưới Công Nghệ (Tech Grid Background) */
-        .bg-grid {
+        /* Nền tối giản họa tiết chấm tinh tế */
+        .bg-pattern {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 35px 35px;
+            background-image: radial-gradient(rgba(23, 147, 209, 0.15) 1px, transparent 1px);
+            background-size: 24px 24px;
             z-index: 0;
             pointer-events: none;
         }
 
-        /* Đốm sáng Neon chìm phía sau */
-        .glow-orb {
-            position: fixed;
-            width: 350px;
-            height: 350px;
-            border-radius: 50%;
-            filter: blur(120px);
-            z-index: 0;
-            pointer-events: none;
-            opacity: 0.5;
-        }
-        .orb-1 { top: -50px; left: -50px; background: #0284c7; }
-        .orb-2 { bottom: -50px; right: -50px; background: #7c3aed; }
-
-        /* Card container chính */
-        .dev-card {
+        /* Card chính */
+        .bio-card {
             position: relative;
             z-index: 1;
             width: 100%;
-            max-width: 440px;
+            max-width: 400px;
             background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 28px;
-            padding: 40px 28px;
-            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7),
-                        0 0 30px 0 var(--border-glow);
-            transition: border-color 0.5s ease;
-        }
-
-        .dev-card:hover {
-            border-color: rgba(56, 189, 248, 0.4);
-        }
-
-        /* Thẻ Status 'Ready to Code' */
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 14px;
-            background: rgba(34, 197, 94, 0.1);
-            border: 1px solid rgba(34, 197, 94, 0.3);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(23, 147, 209, 0.25);
             border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--accent-green);
-            font-family: 'JetBrains Mono', monospace;
-            margin-bottom: 24px;
+            padding: 36px 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6),
+                        0 0 20px rgba(23, 147, 209, 0.15);
         }
 
-        .pulse-dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--accent-green);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--accent-green);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
-        }
-
-        /* Avatar bọc viền Cyberpunk */
-        .avatar-container {
+        /* Avatar Container */
+        .avatar-box {
             position: relative;
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 20px auto;
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 18px auto;
         }
 
         .avatar-img {
             width: 100%;
             height: 100%;
-            border-radius: 22px;
+            border-radius: 50%;
             object-fit: cover;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            position: relative;
-            z-index: 2;
+            border: 2px solid var(--arch-cyan);
+            box-shadow: 0 0 15px rgba(23, 147, 209, 0.4);
         }
 
-        .avatar-glow {
+        /* Logo Arch Linux gắn nhỏ bên cạnh avatar */
+        .arch-badge {
             position: absolute;
-            inset: -4px;
-            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-purple));
-            border-radius: 26px;
-            z-index: 1;
-            filter: blur(8px);
-            opacity: 0.7;
-            transition: opacity 0.3s ease;
+            bottom: 2px;
+            right: 2px;
+            width: 28px;
+            height: 28px;
+            background: #0f141d;
+            border: 1.5px solid var(--arch-cyan);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--arch-cyan);
+            font-size: 13px;
         }
 
-        .avatar-container:hover .avatar-glow {
-            opacity: 1;
-            filter: blur(12px);
-        }
-
-        /* Phần Header Tên & Chức danh */
-        .profile-info {
+        /* Phần Header Tên & Linux Command */
+        .profile-header {
             text-align: center;
-            margin-bottom: 28px;
+            margin-bottom: 26px;
         }
 
         .name {
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 700;
-            letter-spacing: -0.5px;
-            background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 6px;
+            letter-spacing: -0.3px;
+            margin-bottom: 8px;
+            color: #ffffff;
         }
 
-        .title-code {
+        /* Khung Terminal Command mang đậm chất Arch */
+        .arch-prompt {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(15, 20, 29, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 6px 14px;
+            border-radius: 8px;
             font-family: 'JetBrains Mono', monospace;
             font-size: 13px;
-            color: var(--accent-cyan);
-            margin-bottom: 12px;
-            display: block;
         }
 
-        .description {
-            font-size: 14px;
-            color: var(--text-sub);
-            line-height: 1.6;
+        .user-host {
+            color: var(--arch-cyan);
+            font-weight: 600;
         }
 
-        /* Skills Tag Bar */
-        .skills-bar {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 28px;
+        .prompt-symbol {
+            color: #f43f5e;
         }
 
-        .skill-tag {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            padding: 4px 10px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 6px;
+        .command-text {
             color: #e2e8f0;
         }
 
-        /* Danh sách nút mạng xã hội */
-        .links-container {
+        /* Danh sách các nút liên kết */
+        .links-flex {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 12px;
         }
 
-        .dev-btn {
+        .btn-link {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 16px 20px;
-            background: rgba(255, 255, 255, 0.03);
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 14px;
+            border-radius: 12px;
             color: var(--text-main);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 15px;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
+            transition: all 0.2s ease;
         }
 
         .btn-left {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
         }
 
-        .btn-icon {
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .btn-link i.fa-brands, .btn-link i.fa-solid {
             font-size: 18px;
-            background: rgba(255, 255, 255, 0.05);
-            transition: transform 0.3s ease;
+            width: 22px;
+            text-align: center;
         }
 
-        .btn-label {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .main-text {
-            font-weight: 600;
-            font-size: 15px;
-        }
-
-        .sub-text {
-            font-size: 11px;
-            color: var(--text-sub);
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .arrow-indicator {
+        .arrow-icon {
             font-size: 12px;
             color: var(--text-sub);
-            transition: transform 0.3s ease, color 0.3s ease;
+            transition: transform 0.2s ease;
         }
 
-        /* Hover hiệu ứng cao cấp cho từng loại nút */
-        .dev-btn:hover {
-            transform: translateY(-2px);
-            background: rgba(255, 255, 255, 0.07);
-            border-color: rgba(255, 255, 255, 0.25);
-        }
-
-        .dev-btn:hover .arrow-indicator {
+        /* Hover hiệu ứng tinh tế */
+        .btn-link:hover {
             transform: translateX(4px);
-            color: var(--accent-cyan);
+            background: rgba(23, 147, 209, 0.12);
+            border-color: rgba(23, 147, 209, 0.4);
         }
 
-        .dev-btn:hover .btn-icon {
-            transform: scale(1.1);
+        .btn-link:hover .arrow-icon {
+            transform: translateX(3px);
+            color: var(--arch-cyan);
         }
 
-        /* Màu riêng khi Hover từng ứng dụng */
-        .btn-fb:hover { border-color: rgba(24, 119, 242, 0.5); box-shadow: 0 4px 20px rgba(24, 119, 242, 0.2); }
-        .btn-fb:hover .btn-icon { background: #1877f2; color: #fff; }
-
-        .btn-tt:hover { border-color: rgba(255, 255, 255, 0.6); box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15); }
-        .btn-tt:hover .btn-icon { background: #fff; color: #000; }
-
-        .btn-dc:hover { border-color: rgba(88, 101, 242, 0.5); box-shadow: 0 4px 20px rgba(88, 101, 242, 0.2); }
-        .btn-dc:hover .btn-icon { background: #5865f2; color: #fff; }
-
-        .btn-em:hover { border-color: rgba(234, 67, 53, 0.5); box-shadow: 0 4px 20px rgba(234, 67, 53, 0.2); }
-        .btn-em:hover .btn-icon { background: #ea4335; color: #fff; }
-
-        /* Footer phong cách Terminal */
+        /* Footer */
         footer {
-            margin-top: 32px;
+            margin-top: 26px;
             text-align: center;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-sub);
-            border-top: 1px solid rgba(255, 255, 255, 0.06);
-            padding-top: 20px;
         }
 
         footer span {
-            color: var(--accent-cyan);
+            color: var(--arch-cyan);
         }
     </style>
 </head>
 <body>
 
-    <!-- Hiệu ứng Nền & Glow -->
-    <div class="bg-grid"></div>
-    <div class="glow-orb orb-1"></div>
-    <div class="glow-orb orb-2"></div>
+    <div class="bg-pattern"></div>
 
-    <main class="dev-card">
-        <!-- Header: Status Trạng thái -->
-        <div style="text-align: center;">
-            <div class="status-badge">
-                <span class="pulse-dot"></span>
-                <span>SYSTEM ONLINE / OPEN TO WORK</span>
+    <main class="bio-card">
+        <!-- Avatar + Icon Arch -->
+        <div class="avatar-box">
+            <img src="myfaceplsdontbully.jpg" alt="Nguyễn Hữu Thành" class="avatar-img">
+            <div class="arch-badge" title="Arch Linux User">
+                <i class="fab fa-linux"></i>
             </div>
         </div>
 
-        <!-- Avatar -->
-        <div class="avatar-container">
-            <div class="avatar-glow"></div>
-            <img src="myfaceplsdontbully.jpg" alt="Nguyễn Hữu Thành Avatar" class="avatar-img">
-        </div>
-
-        <!-- Thông tin cá nhân -->
-        <div class="profile-info">
+        <!-- Tên & Terminal prompt -->
+        <div class="profile-header">
             <h1 class="name">Nguyễn Hữu Thành</h1>
-            <span class="title-code">&lt;Senior Software Engineer /&gt;</span>
-            <p class="description">
-                Đam mê xây dựng ứng dụng web hiệu năng cao. Luôn tối ưu từng dòng code và sẵn sàng chinh phục các dự án lớn.
-            </p>
+            <div class="arch-prompt">
+                <span class="user-host">thanh@archlinux</span><span class="prompt-symbol">:~$</span>
+                <span class="command-text">neofetch</span>
+            </div>
         </div>
 
-        <!-- Tag Kỹ Năng / Tech Stack -->
-        <div class="skills-bar">
-            <span class="skill-tag">#FullStack</span>
-            <span class="skill-tag">#JavaScript</span>
-            <span class="skill-tag">#HTML5/CSS3</span>
-            <span class="skill-tag">#Git</span>
-            <span class="skill-tag">#SystemArchitecture</span>
-        </div>
-
-        <!-- Danh sách Các Liên Kết Nền Tảng -->
-        <div class="links-container">
+        <!-- Danh sách các nút liên kết mạng xã hội -->
+        <div class="links-flex">
 
             <!-- Facebook -->
-            <a href="https://www.facebook.com/share/1EoYm2aMis/" target="_blank" class="dev-btn btn-fb">
+            <a href="https://www.facebook.com/share/1EoYm2aMis/" target="_blank" class="btn-link">
                 <div class="btn-left">
-                    <div class="btn-icon" style="color: #1877f2;">
-                        <i class="fab fa-facebook-f"></i>
-                    </div>
-                    <div class="btn-label">
-                        <span class="main-text">Facebook</span>
-                        <span class="sub-text">facebook.com/share</span>
-                    </div>
+                    <i class="fab fa-facebook" style="color: #1877f2;"></i>
+                    <span>Facebook</span>
                 </div>
-                <i class="fas fa-arrow-right arrow-indicator"></i>
+                <i class="fas fa-chevron-right arrow-icon"></i>
             </a>
 
             <!-- TikTok -->
-            <a href="https://www.tiktok.com/@thanusearch?_r=1&_t=ZS-99h5tcZfva4" target="_blank" class="dev-btn btn-tt">
+            <a href="https://www.tiktok.com/@thanusearch?_r=1&_t=ZS-99h5tcZfva4" target="_blank" class="btn-link">
                 <div class="btn-left">
-                    <div class="btn-icon" style="color: #ffffff;">
-                        <i class="fab fa-tiktok"></i>
-                    </div>
-                    <div class="btn-label">
-                        <span class="main-text">TikTok</span>
-                        <span class="sub-text">@thanusearch</span>
-                    </div>
+                    <i class="fab fa-tiktok" style="color: #ffffff;"></i>
+                    <span>TikTok</span>
                 </div>
-                <i class="fas fa-arrow-right arrow-indicator"></i>
+                <i class="fas fa-chevron-right arrow-icon"></i>
             </a>
 
             <!-- Discord -->
-            <a href="https://discord.com" target="_blank" class="dev-btn btn-dc">
+            <a href="https://discord.com" target="_blank" class="btn-link">
                 <div class="btn-left">
-                    <div class="btn-icon" style="color: #5865f2;">
-                        <i class="fab fa-discord"></i>
-                    </div>
-                    <div class="btn-label">
-                        <span class="main-text">Discord Community</span>
-                        <span class="sub-text">Connect on Discord</span>
-                    </div>
+                    <i class="fab fa-discord" style="color: #5865f2;"></i>
+                    <span>Discord</span>
                 </div>
-                <i class="fas fa-arrow-right arrow-indicator"></i>
+                <i class="fas fa-chevron-right arrow-icon"></i>
             </a>
 
             <!-- Email -->
-            <a href="mailto:nguyenhuuthanh06061995@gmail.com" class="dev-btn btn-em">
+            <a href="mailto:nguyenhuuthanh06061995@gmail.com" class="btn-link">
                 <div class="btn-left">
-                    <div class="btn-icon" style="color: #ea4335;">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <div class="btn-label">
-                        <span class="main-text">Work Email</span>
-                        <span class="sub-text">nguyenhuuthanh06061995@gmail.com</span>
-                    </div>
+                    <i class="fas fa-envelope" style="color: #ea4335;"></i>
+                    <span>Email</span>
                 </div>
-                <i class="fas fa-arrow-right arrow-indicator"></i>
+                <i class="fas fa-chevron-right arrow-icon"></i>
             </a>
 
         </div>
 
-        <!-- Footer -->
+        <!-- Footer tối giản -->
         <footer>
-            Built with <span>HTML5 & CSS3</span> • Powered by <span>GitHub Pages</span>
+            <span>btw, i use arch</span>
         </footer>
     </main>
 
