@@ -3,17 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bio | Nguyễn Hữu Thành</title>
-    <!-- Font Awesome cho Icon mạng xã hội -->
+    <title>Nguyễn Hữu Thành | Senior Software Engineer Profile</title>
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Inter & JetBrains Mono (Font chữ huyền thoại của Coder) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        :root {
+            --bg-dark: #090d16;
+            --card-bg: rgba(15, 23, 42, 0.75);
+            --accent-cyan: #38bdf8;
+            --accent-purple: #a855f7;
+            --accent-green: #22c55e;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --border-glow: rgba(56, 189, 248, 0.25);
         }
 
         body {
@@ -21,214 +31,394 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-            color: #ffffff;
-            /* Background Gradient chuyển màu sống động */
-            background: linear-gradient(-45deg, #0f172a, #1e1b4b, #311042, #075985);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            overflow-x: hidden;
+            padding: 24px 16px;
+            background-color: var(--bg-dark);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
             position: relative;
+            overflow-x: hidden;
         }
 
-        /* Hiệu ứng chuyển động màu nền */
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Đốm sáng hiệu ứng phía sau */
-        .glow-circle {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: rgba(56, 189, 248, 0.3);
-            filter: blur(90px);
-            border-radius: 50%;
+        /* Nền hiệu ứng Lưới Công Nghệ (Tech Grid Background) */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 35px 35px;
             z-index: 0;
+            pointer-events: none;
         }
-        .glow-1 { top: 10%; left: 15%; }
-        .glow-2 { bottom: 10%; right: 15%; background: rgba(168, 85, 247, 0.3); }
 
-        /* Card container chính hiệu ứng kính mờ (Glassmorphism) */
-        .card {
+        /* Đốm sáng Neon chìm phía sau */
+        .glow-orb {
+            position: fixed;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            filter: blur(120px);
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+        .orb-1 { top: -50px; left: -50px; background: #0284c7; }
+        .orb-2 { bottom: -50px; right: -50px; background: #7c3aed; }
+
+        /* Card container chính */
+        .dev-card {
             position: relative;
             z-index: 1;
             width: 100%;
-            max-width: 420px;
-            background: rgba(255, 255, 255, 0.07);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 24px;
-            padding: 40px 24px;
-            text-align: center;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            max-width: 440px;
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 28px;
+            padding: 40px 28px;
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7),
+                        0 0 30px 0 var(--border-glow);
+            transition: border-color 0.5s ease;
         }
 
-        .avatar-wrapper {
-            position: relative;
-            display: inline-block;
-            margin-bottom: 20px;
+        .dev-card:hover {
+            border-color: rgba(56, 189, 248, 0.4);
         }
 
-        .avatar {
-            width: 105px;
-            height: 105px;
+        /* Thẻ Status 'Ready to Code' */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent-green);
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 24px;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-green);
             border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
+            box-shadow: 0 0 10px var(--accent-green);
+            animation: pulse 2s infinite;
         }
 
-        h1 {
-            font-size: 24px;
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+
+        /* Avatar bọc viền Cyberpunk */
+        .avatar-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px auto;
+        }
+
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 22px;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        .avatar-glow {
+            position: absolute;
+            inset: -4px;
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-purple));
+            border-radius: 26px;
+            z-index: 1;
+            filter: blur(8px);
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .avatar-container:hover .avatar-glow {
+            opacity: 1;
+            filter: blur(12px);
+        }
+
+        /* Phần Header Tên & Chức danh */
+        .profile-info {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .name {
+            font-size: 26px;
             font-weight: 700;
-            margin-bottom: 6px;
             letter-spacing: -0.5px;
-            background: linear-gradient(to right, #ffffff, #93c5fd);
+            background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            margin-bottom: 6px;
         }
 
-        .bio-subtitle {
+        .title-code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: var(--accent-cyan);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .description {
             font-size: 14px;
-            color: #cbd5e1;
-            margin-bottom: 28px;
-            font-weight: 400;
+            color: var(--text-sub);
+            line-height: 1.6;
         }
 
-        /* Container chứa nút liên kết */
-        .links-flex {
+        /* Skills Tag Bar */
+        .skills-bar {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+        }
+
+        .skill-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            padding: 4px 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+            color: #e2e8f0;
+        }
+
+        /* Danh sách nút mạng xã hội */
+        .links-container {
             display: flex;
             flex-direction: column;
             gap: 14px;
         }
 
-        /* Styling cho từng nút mạng xã hội */
-        .btn-link {
-            position: relative;
+        .dev-btn {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 14px 20px;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            color: #ffffff;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            color: var(--text-main);
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 500;
             font-size: 15px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
             overflow: hidden;
         }
 
-        .btn-content {
+        .btn-left {
             display: flex;
             align-items: center;
             gap: 14px;
         }
 
-        .btn-link i {
-            font-size: 20px;
-            width: 24px;
-            text-align: center;
+        .btn-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            background: rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease;
         }
 
-        .arrow-icon {
+        .btn-label {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .main-text {
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .sub-text {
+            font-size: 11px;
+            color: var(--text-sub);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .arrow-indicator {
             font-size: 12px;
-            opacity: 0.5;
-            transition: transform 0.3s ease, opacity 0.3s ease;
+            color: var(--text-sub);
+            transition: transform 0.3s ease, color 0.3s ease;
         }
 
-        /* Hiệu ứng Hover chuyên nghiệp */
-        .btn-link:hover {
-            transform: translateY(-3px);
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        /* Hover hiệu ứng cao cấp cho từng loại nút */
+        .dev-btn:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(255, 255, 255, 0.25);
         }
 
-        .btn-link:hover .arrow-icon {
+        .dev-btn:hover .arrow-indicator {
             transform: translateX(4px);
-            opacity: 1;
+            color: var(--accent-cyan);
         }
 
-        /* Hover riêng màu thương hiệu cho từng nút */
-        .btn-facebook:hover { border-color: #1877f2; box-shadow: 0 8px 25px rgba(24, 119, 242, 0.4); }
-        .btn-tiktok:hover { border-color: #ff0050; box-shadow: 0 8px 25px rgba(255, 0, 80, 0.4); }
-        .btn-discord:hover { border-color: #5865f2; box-shadow: 0 8px 25px rgba(88, 101, 242, 0.4); }
-        .btn-email:hover { border-color: #ea4335; box-shadow: 0 8px 25px rgba(234, 67, 53, 0.4); }
+        .dev-btn:hover .btn-icon {
+            transform: scale(1.1);
+        }
 
+        /* Màu riêng khi Hover từng ứng dụng */
+        .btn-fb:hover { border-color: rgba(24, 119, 242, 0.5); box-shadow: 0 4px 20px rgba(24, 119, 242, 0.2); }
+        .btn-fb:hover .btn-icon { background: #1877f2; color: #fff; }
+
+        .btn-tt:hover { border-color: rgba(255, 255, 255, 0.6); box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15); }
+        .btn-tt:hover .btn-icon { background: #fff; color: #000; }
+
+        .btn-dc:hover { border-color: rgba(88, 101, 242, 0.5); box-shadow: 0 4px 20px rgba(88, 101, 242, 0.2); }
+        .btn-dc:hover .btn-icon { background: #5865f2; color: #fff; }
+
+        .btn-em:hover { border-color: rgba(234, 67, 53, 0.5); box-shadow: 0 4px 20px rgba(234, 67, 53, 0.2); }
+        .btn-em:hover .btn-icon { background: #ea4335; color: #fff; }
+
+        /* Footer phong cách Terminal */
         footer {
-            margin-top: 30px;
+            margin-top: 32px;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 12px;
-            color: #94a3b8;
+            color: var(--text-sub);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 20px;
+        }
+
+        footer span {
+            color: var(--accent-cyan);
         }
     </style>
 </head>
 <body>
 
-    <!-- Đốm sáng trang trí nền -->
-    <div class="glow-circle glow-1"></div>
-    <div class="glow-circle glow-2"></div>
+    <!-- Hiệu ứng Nền & Glow -->
+    <div class="bg-grid"></div>
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
 
-    <div class="card">
-        <!-- Ảnh Đại Diện -->
-        <div class="avatar-wrapper">
-            <img src="myfaceplsdontbully.jpg" alt="Avatar" class="avatar">
+    <main class="dev-card">
+        <!-- Header: Status Trạng thái -->
+        <div style="text-align: center;">
+            <div class="status-badge">
+                <span class="pulse-dot"></span>
+                <span>SYSTEM ONLINE / OPEN TO WORK</span>
+            </div>
         </div>
 
-        <!-- Họ Tên & Bio -->
-        <h1>Nguyễn Hữu Thành</h1>
-        <p class="bio-subtitle">Welcome to my personal space 🚀</p>
+        <!-- Avatar -->
+        <div class="avatar-container">
+            <div class="avatar-glow"></div>
+            <img src="myfaceplsdontbully.jpg" alt="Nguyễn Hữu Thành Avatar" class="avatar-img">
+        </div>
 
-        <!-- Danh Sách Các Nút Mạng Xã Hội -->
-        <div class="links-flex">
+        <!-- Thông tin cá nhân -->
+        <div class="profile-info">
+            <h1 class="name">Nguyễn Hữu Thành</h1>
+            <span class="title-code">&lt;Senior Software Engineer /&gt;</span>
+            <p class="description">
+                Đam mê xây dựng ứng dụng web hiệu năng cao. Luôn tối ưu từng dòng code và sẵn sàng chinh phục các dự án lớn.
+            </p>
+        </div>
+
+        <!-- Tag Kỹ Năng / Tech Stack -->
+        <div class="skills-bar">
+            <span class="skill-tag">#FullStack</span>
+            <span class="skill-tag">#JavaScript</span>
+            <span class="skill-tag">#HTML5/CSS3</span>
+            <span class="skill-tag">#Git</span>
+            <span class="skill-tag">#SystemArchitecture</span>
+        </div>
+
+        <!-- Danh sách Các Liên Kết Nền Tảng -->
+        <div class="links-container">
 
             <!-- Facebook -->
-            <a href="https://www.facebook.com/share/1EoYm2aMis/" target="_blank" class="btn-link btn-facebook">
-                <div class="btn-content">
-                    <i class="fab fa-facebook" style="color: #1877f2;"></i>
-                    <span>Facebook</span>
+            <a href="https://www.facebook.com/share/1EoYm2aMis/" target="_blank" class="dev-btn btn-fb">
+                <div class="btn-left">
+                    <div class="btn-icon" style="color: #1877f2;">
+                        <i class="fab fa-facebook-f"></i>
+                    </div>
+                    <div class="btn-label">
+                        <span class="main-text">Facebook</span>
+                        <span class="sub-text">facebook.com/share</span>
+                    </div>
                 </div>
-                <i class="fas fa-chevron-right arrow-icon"></i>
+                <i class="fas fa-arrow-right arrow-indicator"></i>
             </a>
 
             <!-- TikTok -->
-            <a href="https://www.tiktok.com/@thanusearch?_r=1&_t=ZS-99h5tcZfva4" target="_blank" class="btn-link btn-tiktok">
-                <div class="btn-content">
-                    <i class="fab fa-tiktok" style="color: #ffffff;"></i>
-                    <span>TikTok</span>
+            <a href="https://www.tiktok.com/@thanusearch?_r=1&_t=ZS-99h5tcZfva4" target="_blank" class="dev-btn btn-tt">
+                <div class="btn-left">
+                    <div class="btn-icon" style="color: #ffffff;">
+                        <i class="fab fa-tiktok"></i>
+                    </div>
+                    <div class="btn-label">
+                        <span class="main-text">TikTok</span>
+                        <span class="sub-text">@thanusearch</span>
+                    </div>
                 </div>
-                <i class="fas fa-chevron-right arrow-icon"></i>
+                <i class="fas fa-arrow-right arrow-indicator"></i>
             </a>
 
-            <!-- Discord (Thay link Server/User Discord của bạn vào chỗ href) -->
-            <a href="https://discord.com" target="_blank" class="btn-link btn-discord">
-                <div class="btn-content">
-                    <i class="fab fa-discord" style="color: #5865f2;"></i>
-                    <span>Discord</span>
+            <!-- Discord -->
+            <a href="https://discord.com" target="_blank" class="dev-btn btn-dc">
+                <div class="btn-left">
+                    <div class="btn-icon" style="color: #5865f2;">
+                        <i class="fab fa-discord"></i>
+                    </div>
+                    <div class="btn-label">
+                        <span class="main-text">Discord Community</span>
+                        <span class="sub-text">Connect on Discord</span>
+                    </div>
                 </div>
-                <i class="fas fa-chevron-right arrow-icon"></i>
+                <i class="fas fa-arrow-right arrow-indicator"></i>
             </a>
 
             <!-- Email -->
-            <a href="mailto:nguyenhuuthanh06061995@gmail.com" class="btn-link btn-email">
-                <div class="btn-content">
-                    <i class="fas fa-envelope" style="color: #ea4335;"></i>
-                    <span>Liên Hệ Email</span>
+            <a href="mailto:nguyenhuuthanh06061995@gmail.com" class="dev-btn btn-em">
+                <div class="btn-left">
+                    <div class="btn-icon" style="color: #ea4335;">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="btn-label">
+                        <span class="main-text">Work Email</span>
+                        <span class="sub-text">nguyenhuuthanh06061995@gmail.com</span>
+                    </div>
                 </div>
-                <i class="fas fa-chevron-right arrow-icon"></i>
+                <i class="fas fa-arrow-right arrow-indicator"></i>
             </a>
 
         </div>
 
+        <!-- Footer -->
         <footer>
-            © 2026 ThanMG. All rights reserved.
+            Built with <span>HTML5 & CSS3</span> • Powered by <span>GitHub Pages</span>
         </footer>
-    </div>
+    </main>
 
 </body>
 </html>
