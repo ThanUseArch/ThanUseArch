@@ -7,26 +7,22 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
-    <!-- Nhúng CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Space+Grotesk:wght@500;700&family=Fira+Code:wght@700&display=swap" rel="stylesheet">
+    <!-- File CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Canvas Nền Mạng Lưới Vũ Trụ Sâu -->
-    <canvas id="space-canvas"></canvas>
+    <!-- Canvas Nền Hoa Anh Đào Rơi -->
+    <canvas id="sakura-canvas"></canvas>
 
-    <!-- Quầng sáng Ambient mờ nhẹ nền -->
-    <div class="ambient-glow glow-top"></div>
-    <div class="ambient-glow glow-bottom"></div>
-
-    <!-- Khung Bio Card Chính (Cố định, Không nghiêng) -->
+    <!-- Khung Bio Card Chính -->
     <div class="master-card-container">
         <main class="master-card">
             
-            <!-- Avatar Phát Sáng -->
+            <!-- Avatar với Viền Xoay Chuyển Động -->
             <div class="avatar-box">
-                <div class="avatar-glow"></div>
+                <div class="avatar-spin-glow"></div>
                 <img src="myfaceplsdontbully.jpg" alt="Nguyễn Hữu Thành" class="avatar-img">
             </div>
 
@@ -82,7 +78,7 @@
 
             </div>
 
-            <!-- Khung ASCII Art Rộng Chuẩn Nét 3D -->
+            <!-- Ô Chứa ASCII Art Rộng Thoải Mái -->
             <div class="ascii-wrapper">
 <pre class="ascii-art">
  _                      _     _ _ _        
@@ -101,11 +97,11 @@
         </main>
     </div>
 
-    <!-- Script Nền Mạng Lưới Vũ Trụ (Constellation Canvas) -->
+    <!-- Script Hiệu Ứng Hoa Anh Đào Rơi -->
     <script>
-        const canvas = document.getElementById('space-canvas');
+        const canvas = document.getElementById('sakura-canvas');
         const ctx = canvas.getContext('2d');
-        let particles = [];
+        let petals = [];
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
@@ -114,67 +110,68 @@
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
-        class Particle {
+        class Petal {
             constructor() {
+                this.reset();
+                this.y = Math.random() * canvas.height; // Cho rải rác đều ngay từ đầu
+            }
+
+            reset() {
                 this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.radius = Math.random() * 1.5 + 0.5;
-                this.vx = (Math.random() - 0.5) * 0.4;
-                this.vy = (Math.random() - 0.5) * 0.4;
+                this.y = -20;
+                this.size = Math.random() * 8 + 6;
+                this.speedY = Math.random() * 1.2 + 0.8;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.angle = Math.random() * 360;
+                this.spin = (Math.random() - 0.5) * 0.03;
+                this.opacity = Math.random() * 0.5 + 0.4;
             }
 
             update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+                this.y += this.speedY;
+                this.x += Math.sin(this.y * 0.01) + this.speedX;
+                this.angle += this.spin;
+
+                if (this.y > canvas.height + 20) {
+                    this.reset();
+                }
             }
 
             draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.angle);
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(51, 170, 221, 0.7)';
+                
+                // Vẽ Cánh Hoa Anh Đào mềm mại
+                ctx.moveTo(0, 0);
+                ctx.bezierCurveTo(-this.size, -this.size / 2, -this.size, this.size, 0, this.size * 1.5);
+                ctx.bezierCurveTo(this.size, this.size, this.size, -this.size / 2, 0, 0);
+                
+                ctx.fillStyle = `rgba(255, 183, 197, ${this.opacity})`;
                 ctx.fill();
+                ctx.restore();
             }
         }
 
-        function initSpace() {
-            particles = [];
-            const count = Math.floor((canvas.width * canvas.height) / 15000);
+        function initSakura() {
+            petals = [];
+            const count = Math.floor(window.innerWidth / 18);
             for (let i = 0; i < count; i++) {
-                particles.push(new Particle());
+                petals.push(new Petal());
             }
         }
-        initSpace();
+        initSakura();
 
-        function connectParticles() {
-            for (let a = 0; a < particles.length; a++) {
-                for (let b = a + 1; b < particles.length; b++) {
-                    const dx = particles[a].x - particles[b].x;
-                    const dy = particles[a].y - particles[b].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 120) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(23, 147, 209, ${0.15 - dist / 1200})`;
-                        ctx.lineWidth = 0.8;
-                        ctx.moveTo(particles[a].x, particles[a].y);
-                        ctx.lineTo(particles[b].x, particles[b].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
-
-        function animateSpace() {
+        function animateSakura() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
+            petals.forEach(p => {
                 p.update();
                 p.draw();
             });
-            connectParticles();
-            requestAnimationFrame(animateSpace);
+            requestAnimationFrame(animateSakura);
         }
-        animateSpace();
+        animateSakura();
     </script>
 </body>
 </html>
