@@ -10,15 +10,15 @@ body {
     justify-content: center;
     align-items: center;
     padding: 30px 16px;
-    /* Tông màu chủ đạo: Hồng ở trên chuyển dần sang Xanh lam ở dưới */
-    background: linear-gradient(180deg, #2b1029 0%, #151a30 50%, #0a2438 100%);
+    /* Phối màu chuẩn 100% theo ảnh mẫu: Hồng Pastel góc trái -> Xanh Lam Pastel góc phải */
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 35%, #e0c3fc 65%, #8ec5fc 100%);
     font-family: 'Plus Jakarta Sans', sans-serif;
-    color: #ffffff;
+    color: #2d3748;
     position: relative;
     overflow-x: hidden;
 }
 
-/* Background Canvas Hoa Anh Đào */
+/* Canvas Hoa Anh Đào */
 #sakura-canvas {
     position: fixed;
     top: 0;
@@ -29,34 +29,35 @@ body {
     pointer-events: none;
 }
 
-/* Khung Card Bio - Mở Rộng 520px để chứa thoải mái ASCII */
+/* Master Card Container - Tăng rộng 540px */
 .master-card-container {
     position: relative;
     z-index: 1;
     width: 100%;
-    max-width: 520px;
+    max-width: 540px;
     padding: 1px;
-    border-radius: 28px;
-    background: linear-gradient(145deg, rgba(255, 183, 197, 0.4), rgba(79, 172, 254, 0.25));
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6),
-                0 0 30px rgba(255, 183, 197, 0.15);
+    border-radius: 30px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08),
+                0 10px 20px rgba(255, 255, 255, 0.4) inset;
 }
 
 .master-card {
-    background: rgba(13, 17, 31, 0.85);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    border-radius: 27px;
-    padding: 38px 26px 24px 26px;
+    /* Khung kính mờ sang trọng, nổi bật trên nền Pastel */
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 29px;
+    padding: 38px 28px 24px 28px;
     text-align: center;
 }
 
-/* Avatar Box + Viền Xoay Đa Sắc Động */
+/* Avatar Box + Viền Xoay Mềm Mại */
 .avatar-box {
     position: relative;
     width: 115px;
     height: 115px;
-    margin: 0 auto 20px auto;
+    margin: 0 auto 18px auto;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -69,13 +70,12 @@ body {
     border-radius: 50%;
     background: conic-gradient(
         #ff9a9e, 
-        #fecfef, 
         #a1c4fd, 
         #c2e9fb, 
+        #fecfef, 
         #ff9a9e
     );
     animation: spinGlow 4s linear infinite;
-    filter: drop-shadow(0 0 8px rgba(255, 154, 158, 0.6));
 }
 
 @keyframes spinGlow {
@@ -90,7 +90,7 @@ body {
     height: 107px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3.5px solid #0d111f;
+    border: 3px solid #ffffff;
 }
 
 /* Tên Cá Nhân */
@@ -100,12 +100,10 @@ body {
     font-weight: 700;
     letter-spacing: -0.3px;
     margin-bottom: 22px;
-    background: linear-gradient(90deg, #ffffff, #fecfef);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #2b2d42;
 }
 
-/* Danh sách các link */
+/* Links Group */
 .links-flex {
     display: flex;
     flex-direction: column;
@@ -118,11 +116,12 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 13px 18px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.8);
     border-radius: 16px;
-    color: #ffffff;
+    color: #2b2d42;
     text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
     transition: all 0.25s ease;
 }
 
@@ -140,65 +139,61 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 17px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #ffffff;
+    color: #4a5568;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     transition: all 0.25s ease;
 }
 
 .btn-text {
-    font-weight: 600;
+    font-weight: 700;
     font-size: 15px;
 }
 
 .arrow-icon {
     font-size: 13px;
-    color: rgba(255, 255, 255, 0.3);
+    color: #a0aec0;
     transition: all 0.25s ease;
 }
 
 .btn-link:hover {
-    transform: translateX(4px);
-    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
 }
 
 .btn-link:hover .arrow-icon {
     transform: translateX(3px);
-    color: #ffffff;
+    color: #2b2d42;
 }
 
-/* Hover Colors */
-.btn-fb:hover { border-color: rgba(24, 119, 242, 0.6); }
+/* Custom Colors Hover */
 .btn-fb:hover .icon-box { background: #1877f2; color: #fff; }
-
-.btn-tt:hover { border-color: rgba(255, 255, 255, 0.7); }
-.btn-tt:hover .icon-box { background: #fff; color: #000; }
-
-.btn-dc:hover { border-color: rgba(88, 101, 242, 0.6); }
+.btn-tt:hover .icon-box { background: #000000; color: #fff; }
 .btn-dc:hover .icon-box { background: #5865f2; color: #fff; }
-
-.btn-em:hover { border-color: rgba(234, 67, 53, 0.6); }
 .btn-em:hover .icon-box { background: #ea4335; color: #fff; }
 
-/* Ô ASCII Art Mở Rộng Rãi Chuẩn Nét 100% */
+/* Ô Chứa ASCII Art Mở Rộng Thoải Mái Chuẩn Nét 100% */
 .ascii-wrapper {
     margin-top: 22px;
     padding: 16px 12px;
-    background: rgba(5, 8, 18, 0.6);
-    border: 1px solid rgba(255, 183, 197, 0.25);
+    background: rgba(30, 35, 50, 0.88); /* Ô màu tối giúp nổi bật nghệ thuật ASCII */
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 16px;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 .ascii-art {
     font-family: 'Fira Code', 'Courier New', monospace;
-    font-size: 11px; /* Kích thước font chữ hiển thị nét căng */
-    line-height: 1.1;
+    font-size: 11.5px; /* Kích thước tối ưu rõ nét, vừa vặn tuyệt đối */
+    line-height: 1.15;
     font-weight: 700;
-    color: #ffb7c5; /* Tông màu hoa anh đào phát sáng */
-    text-shadow: 0 0 10px rgba(255, 183, 197, 0.6);
+    color: #fecfef; /* Màu hồng phấn pastel phát sáng nhẹ */
+    text-shadow: 0 0 8px rgba(254, 207, 239, 0.5);
     white-space: pre;
     text-align: left;
     display: inline-block;
@@ -208,7 +203,7 @@ body {
 footer {
     margin-top: 20px;
     font-size: 11px;
-    color: rgba(255, 255, 255, 0.35);
-    font-weight: 600;
+    color: rgba(43, 45, 66, 0.6);
+    font-weight: 700;
     letter-spacing: 0.8px;
 }
