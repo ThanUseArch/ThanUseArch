@@ -3,133 +3,230 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bio Cá Nhân</title>
-    <!-- Thêm icon từ FontAwesome -->
+    <title>Bio | Nguyễn Hữu Thành</title>
+    <!-- Font Awesome cho Icon mạng xã hội -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
             color: #ffffff;
+            /* Background Gradient chuyển màu sống động */
+            background: linear-gradient(-45deg, #0f172a, #1e1b4b, #311042, #075985);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            overflow-x: hidden;
+            position: relative;
         }
 
-        .container {
+        /* Hiệu ứng chuyển động màu nền */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Đốm sáng hiệu ứng phía sau */
+        .glow-circle {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(56, 189, 248, 0.3);
+            filter: blur(90px);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        .glow-1 { top: 10%; left: 15%; }
+        .glow-2 { bottom: 10%; right: 15%; background: rgba(168, 85, 247, 0.3); }
+
+        /* Card container chính hiệu ứng kính mờ (Glassmorphism) */
+        .card {
+            position: relative;
+            z-index: 1;
             width: 100%;
-            max-width: 400px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 30px 20px;
+            max-width: 420px;
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 24px;
+            padding: 40px 24px;
             text-align: center;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
         }
 
-        .profile-img {
-            width: 110px;
-            height: 110px;
+        .avatar-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .avatar {
+            width: 105px;
+            height: 105px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid #00d2ff;
-            margin-bottom: 15px;
-            box-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
         }
 
         h1 {
-            font-size: 22px;
-            margin-bottom: 5px;
-            letter-spacing: 0.5px;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, #ffffff, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .bio-text {
+        .bio-subtitle {
             font-size: 14px;
-            color: #d1d5db;
-            margin-bottom: 25px;
-            line-height: 1.4;
+            color: #cbd5e1;
+            margin-bottom: 28px;
+            font-weight: 400;
         }
 
-        .links-container {
+        /* Container chứa nút liên kết */
+        .links-flex {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 14px;
         }
 
-        .link-btn {
+        /* Styling cho từng nút mạng xã hội */
+        .btn-link {
+            position: relative;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 12px;
+            justify-content: space-between;
             padding: 14px 20px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
             color: #ffffff;
             text-decoration: none;
-            border-radius: 12px;
             font-weight: 600;
             font-size: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
         }
 
-        .link-btn:hover {
-            background: #00d2ff;
-            color: #0f2027;
+        .btn-content {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .btn-link i {
+            font-size: 20px;
+            width: 24px;
+            text-align: center;
+        }
+
+        .arrow-icon {
+            font-size: 12px;
+            opacity: 0.5;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        /* Hiệu ứng Hover chuyên nghiệp */
+        .btn-link:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 210, 255, 0.4);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
-        .link-btn i {
-            font-size: 18px;
+        .btn-link:hover .arrow-icon {
+            transform: translateX(4px);
+            opacity: 1;
         }
+
+        /* Hover riêng màu thương hiệu cho từng nút */
+        .btn-facebook:hover { border-color: #1877f2; box-shadow: 0 8px 25px rgba(24, 119, 242, 0.4); }
+        .btn-tiktok:hover { border-color: #ff0050; box-shadow: 0 8px 25px rgba(255, 0, 80, 0.4); }
+        .btn-discord:hover { border-color: #5865f2; box-shadow: 0 8px 25px rgba(88, 101, 242, 0.4); }
+        .btn-email:hover { border-color: #ea4335; box-shadow: 0 8px 25px rgba(234, 67, 53, 0.4); }
 
         footer {
-            margin-top: 25px;
+            margin-top: 30px;
             font-size: 12px;
-            color: #9ca3af;
+            color: #94a3b8;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- Ảnh đại diện (Thay URL ảnh của bạn vào đây) -->
-        <img src="https://via.placeholder.com/150" alt="Avatar" class="profile-img">
+    <!-- Đốm sáng trang trí nền -->
+    <div class="glow-circle glow-1"></div>
+    <div class="glow-circle glow-2"></div>
 
-        <!-- Tên và Bio -->
-        <h1>Tên Của Bạn</h1>
-        <p class="bio-text">Lập trình viên / Creator / Yêu thích công nghệ 🚀</p>
+    <div class="card">
+        <!-- Ảnh Đại Diện -->
+        <div class="avatar-wrapper">
+            <img src="https://ui-avatars.com/api/?name=Thanh+Nguyen&background=0D8ABC&color=fff&size=128" alt="Avatar" class="avatar">
+        </div>
 
-        <!-- Danh sách liên kết -->
-        <div class="links-container">
-            <a href="https://github.com/username" target="_blank" class="link-btn">
-                <i class="fab fa-github"></i> GitHub Profile
+        <!-- Họ Tên & Bio -->
+        <h1>Nguyễn Hữu Thành</h1>
+        <p class="bio-subtitle">Welcome to my personal space 🚀</p>
+
+        <!-- Danh Sách Các Nút Mạng Xã Hội -->
+        <div class="links-flex">
+
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/share/1EoYm2aMis/" target="_blank" class="btn-link btn-facebook">
+                <div class="btn-content">
+                    <i class="fab fa-facebook" style="color: #1877f2;"></i>
+                    <span>Facebook</span>
+                </div>
+                <i class="fas fa-chevron-right arrow-icon"></i>
             </a>
 
-            <a href="https://facebook.com" target="_blank" class="link-btn">
-                <i class="fab fa-facebook"></i> Facebook Cá Nhân
+            <!-- TikTok -->
+            <a href="https://www.tiktok.com/@thanusearch?_r=1&_t=ZS-99h5tcZfva4" target="_blank" class="btn-link btn-tiktok">
+                <div class="btn-content">
+                    <i class="fab fa-tiktok" style="color: #ffffff;"></i>
+                    <span>TikTok</span>
+                </div>
+                <i class="fas fa-chevron-right arrow-icon"></i>
             </a>
 
-            <a href="https://tiktok.com" target="_blank" class="link-btn">
-                <i class="fab fa-tiktok"></i> Kênh TikTok
+            <!-- Discord (Thay link Server/User Discord của bạn vào chỗ href) -->
+            <a href="https://discord.com" target="_blank" class="btn-link btn-discord">
+                <div class="btn-content">
+                    <i class="fab fa-discord" style="color: #5865f2;"></i>
+                    <span>Discord</span>
+                </div>
+                <i class="fas fa-chevron-right arrow-icon"></i>
             </a>
 
-            <a href="mailto:email@example.com" class="link-btn">
-                <i class="fas fa-envelope"></i> Liên Hệ Qua Email
+            <!-- Email -->
+            <a href="mailto:nguyenhuuthanh06061995@gmail.com" class="btn-link btn-email">
+                <div class="btn-content">
+                    <i class="fas fa-envelope" style="color: #ea4335;"></i>
+                    <span>Liên Hệ Email</span>
+                </div>
+                <i class="fas fa-chevron-right arrow-icon"></i>
             </a>
+
         </div>
 
         <footer>
-            © 2026 Designed by Me
+            © 2026 ThanMG. All rights reserved.
         </footer>
     </div>
 
