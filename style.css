@@ -9,7 +9,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 30px 16px;
+    padding: 30px 16px 100px 16px; /* Để trống phần dưới cho thanh Tab */
     background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 35%, #e0c3fc 65%, #8ec5fc 100%);
     font-family: 'Plus Jakarta Sans', sans-serif;
     color: #2d3748;
@@ -46,7 +46,7 @@ body {
     -webkit-backdrop-filter: blur(30px);
     border: 1px solid rgba(255, 255, 255, 0.6);
     border-radius: 29px;
-    padding: 38px 28px 24px 28px;
+    padding: 38px 28px 28px 28px;
     text-align: center;
 }
 
@@ -97,28 +97,37 @@ body {
     font-size: 26px;
     font-weight: 700;
     letter-spacing: -0.3px;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
     color: #2b2d42;
 }
 
-/* Thanh Tab Navigation */
+/* Thanh Tab Cố Định Ở Sát Cạnh Dưới Màn Hình */
 .tab-nav {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
     display: flex;
     justify-content: center;
     gap: 8px;
-    margin-bottom: 22px;
-    background: rgba(255, 255, 255, 0.5);
-    padding: 6px;
-    border-radius: 18px;
-    border: 1px solid rgba(255, 255, 255, 0.7);
+    width: 90%;
+    max-width: 440px;
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    padding: 8px;
+    border-radius: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
 
 .tab-btn {
     flex: 1;
-    padding: 10px 12px;
+    padding: 12px 14px;
     border: none;
     background: transparent;
-    border-radius: 12px;
+    border-radius: 16px;
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 13.5px;
     font-weight: 700;
@@ -139,7 +148,7 @@ body {
 .tab-btn.active {
     background: #ffffff;
     color: #2b2d42;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
 /* Tab Content Visibility */
@@ -276,7 +285,7 @@ body {
 
 /* Footer */
 footer {
-    margin-top: 20px;
+    margin-top: 22px;
     font-size: 11px;
     color: rgba(43, 45, 66, 0.6);
     font-weight: 700;
