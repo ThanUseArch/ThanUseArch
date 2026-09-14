@@ -9,7 +9,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 30px 16px 100px 16px; /* Để trống phần dưới cho thanh Tab */
+    padding: 30px 16px 100px 16px;
     background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 35%, #e0c3fc 65%, #8ec5fc 100%);
     font-family: 'Plus Jakarta Sans', sans-serif;
     color: #2d3748;
@@ -166,33 +166,63 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Ô Văn Bản Nhỏ (Trang chủ) */
+/* Ô Văn Bản Nhỏ (Home Tab) */
 .small-text-box {
-    padding: 20px 18px;
+    padding: 20px 22px;
     background: rgba(255, 255, 255, 0.6);
     border: 1px solid rgba(255, 255, 255, 0.8);
     border-radius: 18px;
-    font-size: 14.5px;
+    font-size: 15px;
     color: #2b2d42;
     line-height: 1.6;
     font-weight: 600;
 }
 
-/* Ô Văn Bản Lớn (Information) */
+/* Ô Văn Bản Lớn (Information Tab) */
 .large-text-box {
-    padding: 24px 20px;
+    padding: 24px 22px;
     background: rgba(255, 255, 255, 0.6);
     border: 1px solid rgba(255, 255, 255, 0.8);
     border-radius: 18px;
-    font-size: 14.5px;
     color: #2b2d42;
-    line-height: 1.7;
-    font-weight: 600;
     text-align: left;
-    min-height: 120px;
 }
 
-/* Links Group (Nền tảng) */
+.info-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.info-list li {
+    position: relative;
+    padding-left: 18px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.info-list li::before {
+    content: "-";
+    position: absolute;
+    left: 0;
+    font-weight: 800;
+}
+
+/* Dòng Lời Cảm Ơn Căn Giữa + Font To */
+.info-thankyou {
+    text-align: center;
+    font-size: 15.5px;
+    font-weight: 700;
+    color: #1a202c;
+    line-height: 1.6;
+    padding-top: 10px;
+    border-top: 1px dashed rgba(43, 45, 66, 0.2);
+}
+
+/* Links Group (Platforms Tab) */
 .links-flex {
     display: flex;
     flex-direction: column;
