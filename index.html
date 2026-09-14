@@ -29,19 +29,6 @@
             <!-- Tên Cá Nhân -->
             <h1 class="name">Nguyễn Hữu Thành</h1>
 
-            <!-- Thanh Tab Chuyển Mục -->
-            <nav class="tab-nav">
-                <button class="tab-btn active" onclick="switchTab('home')">
-                    <i class="fas fa-home"></i> Trang chủ
-                </button>
-                <button class="tab-btn" onclick="switchTab('platforms')">
-                    <i class="fas fa-layer-group"></i> Nền tảng
-                </button>
-                <button class="tab-btn" onclick="switchTab('info')">
-                    <i class="fas fa-user"></i> Information
-                </button>
-            </nav>
-
             <!-- NỘI DUNG 1: TRANG CHỦ -->
             <div id="tab-home" class="tab-content active">
                 <div class="small-text-box">
@@ -129,6 +116,19 @@
             </footer>
         </main>
     </div>
+
+    <!-- Thanh Tab Chuyển Mục (Được đặt cố định phía dưới cùng màn hình) -->
+    <nav class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('home')">
+            <i class="fas fa-home"></i> Trang chủ
+        </button>
+        <button class="tab-btn" onclick="switchTab('platforms')">
+            <i class="fas fa-layer-group"></i> Nền tảng
+        </button>
+        <button class="tab-btn" onclick="switchTab('info')">
+            <i class="fas fa-user"></i> Information
+        </button>
+    </nav>
 
     <!-- Script Xử Lý Chuyển Tab, Copy Discord & Hoa Anh Đào -->
     <script>
