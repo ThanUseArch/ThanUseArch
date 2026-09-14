@@ -13,14 +13,14 @@
 </head>
 <body>
 
-    <!-- Canvas Nền Hoa Anh Đào Rơi & Hạt Sáng -->
+    <!-- Canvas Nền Hoa Anh Đào Rơi -->
     <canvas id="sakura-canvas"></canvas>
 
     <!-- Khung Bio Card Chính -->
     <div class="master-card-container">
         <main class="master-card">
             
-            <!-- Avatar với Viền Xoay Chuyển Động Pastels -->
+            <!-- Avatar với Viền Xoay Chuyển Động -->
             <div class="avatar-box">
                 <div class="avatar-spin-glow"></div>
                 <img src="myfaceplsdontbully.jpg" alt="Nguyễn Hữu Thành" class="avatar-img">
@@ -29,57 +29,87 @@
             <!-- Tên Cá Nhân -->
             <h1 class="name">Nguyễn Hữu Thành</h1>
 
-            <!-- Các Nút Liên Kết Mạng Xã Hội -->
-            <div class="links-flex">
+            <!-- Thanh Tab Chuyển Mục -->
+            <nav class="tab-nav">
+                <button class="tab-btn active" onclick="switchTab('home')">
+                    <i class="fas fa-home"></i> Trang chủ
+                </button>
+                <button class="tab-btn" onclick="switchTab('platforms')">
+                    <i class="fas fa-layer-group"></i> Nền tảng
+                </button>
+                <button class="tab-btn" onclick="switchTab('info')">
+                    <i class="fas fa-user"></i> Information
+                </button>
+            </nav>
 
-                <!-- Facebook -->
-                <a href="https://www.facebook.com/share/1EoYm2aMis/" target="_blank" class="btn-link btn-fb">
-                    <div class="btn-left">
-                        <div class="icon-box">
-                            <i class="fab fa-facebook-f"></i>
-                        </div>
-                        <span class="btn-text">Facebook</span>
-                    </div>
-                    <i class="fas fa-arrow-right arrow-icon"></i>
-                </a>
-
-                <!-- TikTok -->
-                <a href="https://www.tiktok.com/@thanusearch?_r=1&_t=ZS-99h5tcZfva4" target="_blank" class="btn-link btn-tt">
-                    <div class="btn-left">
-                        <div class="icon-box">
-                            <i class="fab fa-tiktok"></i>
-                        </div>
-                        <span class="btn-text">TikTok</span>
-                    </div>
-                    <i class="fas fa-arrow-right arrow-icon"></i>
-                </a>
-
-                <!-- Discord -->
-                <a href="https://discord.com" target="_blank" class="btn-link btn-dc">
-                    <div class="btn-left">
-                        <div class="icon-box">
-                            <i class="fab fa-discord"></i>
-                        </div>
-                        <span class="btn-text">Discord</span>
-                    </div>
-                    <i class="fas fa-arrow-right arrow-icon"></i>
-                </a>
-
-                <!-- Email -->
-                <a href="mailto:nguyenhuuthanh06061995@gmail.com" class="btn-link btn-em">
-                    <div class="btn-left">
-                        <div class="icon-box">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <span class="btn-text">Email</span>
-                    </div>
-                    <i class="fas fa-arrow-right arrow-icon"></i>
-                </a>
-
+            <!-- NỘI DUNG 1: TRANG CHỦ -->
+            <div id="tab-home" class="tab-content active">
+                <div class="small-text-box">
+                    <p id="home-intro-text">Chưa có nội dung. Bạn có thể gửi câu thoại/giới thiệu ngắn để đưa vào đây nhé!</p>
+                </div>
             </div>
 
-            <!-- Ô Chứa ASCII Art Rộng Rãi -->
-            <div class="ascii-wrapper">
+            <!-- NỘI DUNG 2: NỀN TẢNG -->
+            <div id="tab-platforms" class="tab-content">
+                <div class="links-flex">
+
+                    <!-- Facebook -->
+                    <a href="https://www.facebook.com/share/1EoYm2aMis/" target="_blank" class="btn-link btn-fb">
+                        <div class="btn-left">
+                            <div class="icon-box"><i class="fab fa-facebook-f"></i></div>
+                            <span class="btn-text">Facebook</span>
+                        </div>
+                        <i class="fas fa-arrow-right arrow-icon"></i>
+                    </a>
+
+                    <!-- TikTok -->
+                    <a href="https://www.tiktok.com/@thanusearch?_r=1&_t=ZS-99h5tcZfva4" target="_blank" class="btn-link btn-tt">
+                        <div class="btn-left">
+                            <div class="icon-box"><i class="fab fa-tiktok"></i></div>
+                            <span class="btn-text">TikTok</span>
+                        </div>
+                        <i class="fas fa-arrow-right arrow-icon"></i>
+                    </a>
+
+                    <!-- Discord (Copy Username) -->
+                    <div class="btn-link btn-dc" onclick="copyDiscordTag()" style="cursor: pointer;">
+                        <div class="btn-left">
+                            <div class="icon-box"><i class="fab fa-discord"></i></div>
+                            <span class="btn-text" id="dc-text">thanisrightthere</span>
+                        </div>
+                        <span id="copy-badge" class="copy-badge"><i class="far fa-copy"></i></span>
+                    </div>
+
+                    <!-- Email -->
+                    <a href="mailto:nguyenhuuthanh06061995@gmail.com" class="btn-link btn-em">
+                        <div class="btn-left">
+                            <div class="icon-box"><i class="fas fa-envelope"></i></div>
+                            <span class="btn-text">Email</span>
+                        </div>
+                        <i class="fas fa-arrow-right arrow-icon"></i>
+                    </a>
+
+                    <!-- GitHub -->
+                    <a href="https://github.com/ThanUseArch/than.git" target="_blank" class="btn-link btn-gh">
+                        <div class="btn-left">
+                            <div class="icon-box"><i class="fab fa-github"></i></div>
+                            <span class="btn-text">GitHub</span>
+                        </div>
+                        <i class="fas fa-arrow-right arrow-icon"></i>
+                    </a>
+
+                </div>
+            </div>
+
+            <!-- NỘI DUNG 3: INFORMATION -->
+            <div id="tab-info" class="tab-content">
+                <!-- Ô văn bản lớn -->
+                <div class="large-text-box">
+                    <p id="info-full-text">Chưa có nội dung. Bạn hãy gửi cho tôi đầy đủ thông tin cá nhân/bio dài của bạn để cho vào ô này nhé!</p>
+                </div>
+
+                <!-- Ô ASCII Art (i use arch btw) -->
+                <div class="ascii-wrapper">
 <pre class="ascii-art">
   _                                   _       _     _            
  (_)                                 | |     | |   | |           
@@ -90,6 +120,7 @@
                                                                  
                                                                  
 </pre>
+                </div>
             </div>
 
             <!-- Footer -->
@@ -99,8 +130,29 @@
         </main>
     </div>
 
-    <!-- Script Hiệu Ứng Hoa Anh Đào Rơi -->
+    <!-- Script Xử Lý Chuyển Tab, Copy Discord & Hoa Anh Đào -->
     <script>
+        // Chuyển Tab
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+
+            document.getElementById('tab-' + tabName).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // Copy Username Discord
+        function copyDiscordTag() {
+            const username = "thanisrightthere";
+            navigator.clipboard.writeText(username);
+            const badge = document.getElementById('copy-badge');
+            badge.innerHTML = '<i class="fas fa-check" style="color: #38ef7d;"></i> Copied!';
+            setTimeout(() => {
+                badge.innerHTML = '<i class="far fa-copy"></i>';
+            }, 2000);
+        }
+
+        // Canvas Hoa Anh Đào
         const canvas = document.getElementById('sakura-canvas');
         const ctx = canvas.getContext('2d');
         let elements = [];
