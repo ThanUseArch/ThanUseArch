@@ -179,9 +179,9 @@ body {
     z-index: 100;
     display: flex;
     justify-content: center;
-    gap: 8px;
-    width: 90%;
-    max-width: 440px;
+    gap: 6px;
+    width: 92%;
+    max-width: 500px;
     background: rgba(255, 255, 255, 0.65);
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
@@ -193,12 +193,12 @@ body {
 
 .tab-btn {
     flex: 1;
-    padding: 12px 14px;
+    padding: 12px 10px;
     border: none;
     background: transparent;
     border-radius: 16px;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 13.5px;
+    font-size: 13px;
     font-weight: 700;
     color: #4a5568;
     cursor: pointer;
@@ -380,6 +380,101 @@ body {
     white-space: pre;
     text-align: left;
     display: inline-block;
+}
+
+/* THIẾT KẾ TERMINAL HYPRLAND STYLED GLASSMORPHISM */
+.terminal-window {
+    background: rgba(18, 22, 34, 0.72);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 18px;
+    padding: 14px 16px;
+    text-align: left;
+    font-family: 'Fira Code', monospace;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    cursor: text;
+}
+
+.terminal-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 12px;
+}
+
+.dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+}
+.dot.red { background: #ff5f56; }
+.dot.yellow { background: #ffbd2e; }
+.dot.green { background: #27c93f; }
+
+.terminal-title {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-left: 6px;
+    font-weight: 600;
+}
+
+.terminal-body {
+    max-height: 200px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 13px;
+    color: #e2e8f0;
+}
+
+.term-line {
+    word-break: break-all;
+    line-height: 1.4;
+}
+
+.prompt {
+    color: #38ef7d;
+    font-weight: 700;
+    margin-right: 6px;
+}
+
+.highlight {
+    color: #a1c4fd;
+    font-weight: 700;
+}
+
+.warn-text {
+    color: #ff9a9e;
+    font-style: italic;
+}
+
+.terminal-input-row {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+}
+
+#terminal-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    font-family: 'Fira Code', monospace;
+    font-size: 13px;
+}
+
+/* Scrollbar mờ cho Terminal */
+.terminal-body::-webkit-scrollbar {
+    width: 4px;
+}
+.terminal-body::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
 }
 
 /* Footer */
