@@ -64,14 +64,15 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Master Card Container */
+/* Master Card Container - Mở rộng thêm 50% độ rộng */
 .master-card-container {
     position: relative;
     z-index: 1;
     width: 100%;
-    max-width: 560px;
+    max-width: 720px; 
     padding: 1px;
     border-radius: 30px;
+    transition: all 0.3s ease;
 }
 
 .master-card {
@@ -87,7 +88,7 @@ body {
     transition: background 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
 }
 
-/* Chế độ Terminal: Loại bỏ hoàn toàn nền trắng đằng sau để khoét lỗ thấy Hoa Anh Đào */
+/* Chế độ Terminal: Ẩn hoàn toàn khung đằng sau để hoa anh đào đâm xuyên qua */
 .master-card.terminal-mode {
     background: transparent;
     border-color: transparent;
@@ -191,7 +192,7 @@ body {
     justify-content: center;
     gap: 6px;
     width: 92%;
-    max-width: 500px;
+    max-width: 540px;
     background: rgba(255, 255, 255, 0.65);
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
@@ -389,11 +390,11 @@ body {
     display: inline-block;
 }
 
-/* THIẾT KẾ TERMINAL HYPRLAND - TRONG SUỐT HOÀN HẢO */
+/* THIẾT KẾ TERMINAL TO GẤP ĐÔI & ĐÒNG LỆNH ĐẦU TRANG */
 .terminal-window {
-    background: rgba(18, 18, 30, 0.35); /* Tối nhẹ mờ ảo */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(18, 18, 30, 0.35); /* Tối mờ ảo nhìn xuyên qua */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1.5px solid rgba(255, 255, 255, 0.35);
     border-radius: 20px;
     padding: 22px 24px;
@@ -402,19 +403,18 @@ body {
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
     cursor: text;
     transition: all 0.3s ease;
-    min-height: 260px; /* Tăng kích thước chiều dài khung */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-}
-
-.terminal-body {
-    max-height: 480px; /* Khung rộng thoải mái */
+    height: 380px; /* Chiều cao cố định to rộng */
     overflow-y: auto;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start; /* Giúp dòng lệnh bắt đầu ngay từ trên đỉnh */
+}
+
+.terminal-body {
+    display: flex;
+    flex-direction: column;
     gap: 8px;
-    font-size: 14px; /* Cỡ chữ đồng bộ */
+    font-size: 14px;
     color: #f8fafc;
 }
 
@@ -427,11 +427,11 @@ body {
     gap: 8px;
 }
 
-/* Prompt chuẩn đồng bộ cỡ chữ trước & sau khi gửi */
+/* Cỡ chữ Prompt đồng bộ chuẩn */
 .prompt {
     color: #38ef7d;
     font-weight: 700;
-    font-size: 14px; /* Đảm bảo bằng 14px */
+    font-size: 14px;
     line-height: 1.5;
     white-space: nowrap;
     text-shadow: 0 0 8px rgba(56, 239, 125, 0.3);
@@ -451,7 +451,6 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-top: 6px;
 }
 
 #terminal-input {
@@ -461,16 +460,16 @@ body {
     outline: none;
     color: #ffffff;
     font-family: 'Fira Code', monospace;
-    font-size: 14px; /* Đảm bảo chữ nhập bằng đúng 14px của prompt */
+    font-size: 14px;
     line-height: 1.5;
     font-weight: 500;
 }
 
-.terminal-body::-webkit-scrollbar {
-    width: 4px;
+.terminal-window::-webkit-scrollbar {
+    width: 5px;
 }
-.terminal-body::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.25);
+.terminal-window::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
     border-radius: 4px;
 }
 
