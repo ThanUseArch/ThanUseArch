@@ -111,14 +111,14 @@
                 <!-- Ô ASCII Art (i use arch btw) -->
                 <div class="ascii-wrapper">
 <pre class="ascii-art">
- _                                   _       _     _            
+  _                                   _       _     _            
  (_)                                 | |     | |   | |           
   _   _   _ ___  ___    __ _ _ __ ___| |__   | |__ | |___      __
  | | | | | / __|/ _ \  / _` | '__/ __| '_ \  | '_ \| __\ \ /\ / /
  | | | |_| \__ \  __/ | (_| | | | (__| | | | | |_) | |_ \ V  V / 
  |_|  \__,_|___/\___|  \__,_|_|  \___|_| |_| |_.__/ \__| \_/\_/  
                                                                  
-                                                                
+                                                                 
 </pre>
                 </div>
             </div>
@@ -143,7 +143,7 @@
         </button>
     </nav>
 
-    <!-- Script Xử Lý Chuyển Tab, Ngôn Ngữ, Bong Bóng Chat & Hoa Anh Đào -->
+    <!-- Script Xử Lý -->
     <script>
         // Data Ngôn Ngữ VI / EN
         const translations = {
@@ -222,13 +222,13 @@
         
         setInterval(() => {
             bubble.style.opacity = '0';
-            bubble.style.transform = 'translateY(5px) scale(0.9)';
+            bubble.style.transform = 'translate(-50%, 5px) scale(0.9)';
             
             setTimeout(() => {
                 const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
                 bubble.innerText = randomQuote;
                 bubble.style.opacity = '1';
-                bubble.style.transform = 'translateY(0) scale(1)';
+                bubble.style.transform = 'translate(-50%, 0) scale(1)';
             }, 300);
         }, 4000);
 
