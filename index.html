@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stuffs about me | Bio</title>
+    <title>About me | Bio</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
@@ -16,14 +16,21 @@
     <!-- Canvas Nền Hoa Anh Đào Rơi -->
     <canvas id="sakura-canvas"></canvas>
 
+    <!-- Nút Chuyển Đổi Ngôn Ngữ VI / EN ở góc trên bên phải -->
+    <div class="lang-switch-box">
+        <button id="lang-en-btn" class="lang-btn active" onclick="setLanguage('en')">EN</button>
+        <button id="lang-vi-btn" class="lang-btn" onclick="setLanguage('vi')">VI</button>
+    </div>
+
     <!-- Khung Bio Card Chính -->
     <div class="master-card-container">
         <main class="master-card">
             
-            <!-- Avatar với Viền Xoay Chuyển Động -->
+            <!-- Avatar với Viền Xoay & Bong bóng Chat (Speech Bubble) -->
             <div class="avatar-box">
                 <div class="avatar-spin-glow"></div>
                 <img src="myfaceplsdontbully.jpg" alt="Nguyễn Hữu Thành" class="avatar-img">
+                <div class="speech-bubble" id="speech-bubble">hi.</div>
             </div>
 
             <!-- Tên Cá Nhân -->
@@ -32,7 +39,7 @@
             <!-- NỘI DUNG 1: HOME -->
             <div id="tab-home" class="tab-content active">
                 <div class="small-text-box">
-                    <p>Hello, I am Thanh. I created this GitHub page to provide you with more information about me and my projects.</p>
+                    <p id="home-text">Hello, I am Thành. I created this GitHub page to provide you with more information about me and my projects.</p>
                 </div>
             </div>
 
@@ -93,25 +100,25 @@
                 <!-- Ô văn bản lớn -->
                 <div class="large-text-box">
                     <ul class="info-list">
-                        <li>Currently, I am studying at Hoang The Thien High School.</li>
-                        <li>My hobby is programming open-source projects; yes, that is my passion.</li>
-                        <li>At the same time, I am using a Linux Distro, which is Arch Linux.</li>
-                        <li>My favorite developer is Linus Torvalds.</li>
+                        <li id="info-item-1">Currently, I am studying at Hoang The Thien High School.</li>
+                        <li id="info-item-2">My hobby is programming open-source projects; yes, that is my passion.</li>
+                        <li id="info-item-3">At the same time, I am using a Linux Distro, which is Ubuntu. Maybe at the end of 2026, I will switch to Arch Linux.</li>
+                        <li id="info-item-4">My favorite developer is Linus Torvalds.</li>
                     </ul>
-                    <p class="info-thankyou">If you have any questions about me, feel free to contact me on my platforms. Thank you for visiting!</p>
+                    <p class="info-thankyou" id="info-thankyou">If you have any questions about me, feel free to contact me on my platforms. Thank you for visiting!</p>
                 </div>
 
                 <!-- Ô ASCII Art (i use arch btw) -->
                 <div class="ascii-wrapper">
 <pre class="ascii-art">
-  _                                   _       _     _            
+ _                                   _       _     _            
  (_)                                 | |     | |   | |           
   _   _   _ ___  ___    __ _ _ __ ___| |__   | |__ | |___      __
  | | | | | / __|/ _ \  / _` | '__/ __| '_ \  | '_ \| __\ \ /\ / /
  | | | |_| \__ \  __/ | (_| | | | (__| | | | | |_) | |_ \ V  V / 
  |_|  \__,_|___/\___|  \__,_|_|  \___|_| |_| |_.__/ \__| \_/\_/  
                                                                  
-                                                                 
+                                                                
 </pre>
                 </div>
             </div>
@@ -123,21 +130,65 @@
         </main>
     </div>
 
-    <!-- Thanh Tab Chuyển Mục Tiếng Anh (Đóng khung cố định dưới cùng) -->
+    <!-- Thanh Tab Chuyển Mục -->
     <nav class="tab-nav">
         <button class="tab-btn active" onclick="switchTab('home', this)">
-            <i class="fas fa-home"></i> Home
+            <i class="fas fa-home"></i> <span id="tab-btn-home">Home</span>
         </button>
         <button class="tab-btn" onclick="switchTab('platforms', this)">
-            <i class="fas fa-layer-group"></i> Platforms
+            <i class="fas fa-layer-group"></i> <span id="tab-btn-platforms">Platforms</span>
         </button>
         <button class="tab-btn" onclick="switchTab('info', this)">
-            <i class="fas fa-user"></i> Information
+            <i class="fas fa-user"></i> <span id="tab-btn-info">Information</span>
         </button>
     </nav>
 
-    <!-- Script Xử Lý Chuyển Tab, Copy Discord & Hoa Anh Đào -->
+    <!-- Script Xử Lý Chuyển Tab, Ngôn Ngữ, Bong Bóng Chat & Hoa Anh Đào -->
     <script>
+        // Data Ngôn Ngữ VI / EN
+        const translations = {
+            en: {
+                homeText: "Hello, I am Thành. I created this GitHub page to provide you with more information about me and my projects.",
+                info1: "Currently, I am studying at Hoang The Thien High School.",
+                info2: "My hobby is programming open-source projects; yes, that is my passion.",
+                info3: "At the same time, I am using a Linux Distro, which is Ubuntu. Maybe at the end of 2026, I will switch to Arch Linux.",
+                info4: "My favorite developer is Linus Torvalds.",
+                thankyou: "If you have any questions about me, feel free to contact me on my platforms. Thank you for visiting!",
+                tabHome: "Home",
+                tabPlatforms: "Platforms",
+                tabInfo: "Information"
+            },
+            vi: {
+                homeText: "Xin chào tôi là Thành, tôi tạo trang github này để các bạn có thêm các thông tin về tôi và các dự án.",
+                info1: "Hiện tại tôi đang học tại trường trung học phổ thông Hoàng Thế Thiện.",
+                info2: "Tôi có sở thích là lập trình các dự án mã nguồn mở, vâng đó là sở thích của tôi.",
+                info3: "Đồng thời tôi còn đang dùng một Linux Distro, đó chính là Ubuntu. Có lẽ vào cuối năm 2026, tôi sẽ chuyển sang Arch Linux.",
+                info4: "Lập trình viên mà tôi yêu thích nhất là Linus Torvalds.",
+                thankyou: "Nếu bạn có thắc mắc gì về tôi hãy liên hệ các nền tảng của tôi. Cảm ơn vì đã ghé thăm!",
+                tabHome: "Trang chủ",
+                tabPlatforms: "Nền tảng",
+                tabInfo: "Thông tin"
+            }
+        };
+
+        function setLanguage(lang) {
+            const data = translations[lang];
+            
+            document.getElementById('home-text').innerText = data.homeText;
+            document.getElementById('info-item-1').innerText = data.info1;
+            document.getElementById('info-item-2').innerText = data.info2;
+            document.getElementById('info-item-3').innerText = data.info3;
+            document.getElementById('info-item-4').innerText = data.info4;
+            document.getElementById('info-thankyou').innerText = data.thankyou;
+            
+            document.getElementById('tab-btn-home').innerText = data.tabHome;
+            document.getElementById('tab-btn-platforms').innerText = data.tabPlatforms;
+            document.getElementById('tab-btn-info').innerText = data.tabInfo;
+
+            document.getElementById('lang-en-btn').classList.toggle('active', lang === 'en');
+            document.getElementById('lang-vi-btn').classList.toggle('active', lang === 'vi');
+        }
+
         // Chuyển Tab
         function switchTab(tabName, btnElement) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
@@ -157,6 +208,29 @@
                 badge.innerHTML = '<i class="far fa-copy"></i>';
             }, 2000);
         }
+
+        // Bong Bóng Chat Đổi Ngẫu Nhiên Mỗi 4s
+        const quotes = [
+            "hi.",
+            "open source only",
+            "i use arch btw",
+            "Hell nah",
+            "Thank you,Linus Torvalds"
+        ];
+        
+        const bubble = document.getElementById('speech-bubble');
+        
+        setInterval(() => {
+            bubble.style.opacity = '0';
+            bubble.style.transform = 'translateY(5px) scale(0.9)';
+            
+            setTimeout(() => {
+                const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+                bubble.innerText = randomQuote;
+                bubble.style.opacity = '1';
+                bubble.style.transform = 'translateY(0) scale(1)';
+            }, 300);
+        }, 4000);
 
         // Canvas Hoa Anh Đào
         const canvas = document.getElementById('sakura-canvas');
