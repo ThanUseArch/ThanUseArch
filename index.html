@@ -24,7 +24,7 @@
 
     <!-- Khung Bio Card Chính -->
     <div class="master-card-container">
-        <main class="master-card">
+        <main class="master-card" id="master-card">
             
             <!-- Avatar với Viền Xoay & Bong bóng Chat -->
             <div class="avatar-box">
@@ -110,21 +110,23 @@
                 <!-- Ô ASCII Art -->
                 <div class="ascii-wrapper">
 <pre class="ascii-art">
- _                      _     _ _ _        
-(_)                    | |   | | | |       
- _   _  _ ___  ___  __ _| |__ | | |_  _ _ _
-| | | || / __|/ _ \/ _` | '__|| | __|| | | |
-| | | || \__ \  __/ (_| | |   | | |_ | | | |
-|_| |_||_|___/\___|\__,_|_|   |_|\__| \__'_|
+  _                                   _       _     _            
+ (_)                                 | |     | |   | |           
+  _   _   _ ___  ___    __ _ _ __ ___| |__   | |__ | |___      __
+ | | | | | / __|/ _ \  / _` | '__/ __| '_ \  | '_ \| __\ \ /\ / /
+ | | | |_| \__ \  __/ | (_| | | | (__| | | | | |_) | |_ \ V  V / 
+ |_|  \__,_|___/\___|  \__,_|_|  \___|_| |_| |_.__/ \__| \_/\_/  
+                                                                 
+                                                                 
 </pre>
                 </div>
             </div>
 
-            <!-- NỘI DUNG 4: TERMINAL (Style Hyprland Minimalist) -->
+            <!-- NỘI DUNG 4: TERMINAL (Hyprland Ultra-Transparent) -->
             <div id="tab-terminal" class="tab-content">
                 <div class="terminal-window" onclick="document.getElementById('terminal-input').focus();">
                     <div class="terminal-body" id="terminal-body">
-                        <!-- Màn hình trống sạch sẽ chuẩn Hyprland -->
+                        <!-- Màn hình trống hoàn toàn -->
                     </div>
                     <div class="terminal-input-row">
                         <span class="prompt">thanbio@thanbio:~$</span>
@@ -135,7 +137,7 @@
 
             <!-- Footer -->
             <footer>
-                © 2026 NGUYỄN HỮU THÀNH
+                © 2026 ThanUseArch copyright
             </footer>
         </main>
     </div>
@@ -202,7 +204,7 @@
             document.getElementById('lang-vi-btn').classList.toggle('active', lang === 'vi');
         }
 
-        // Chuyển Tab
+        // Chuyển Tab & xử lý hiệu ứng trong suốt đâm xuyên
         function switchTab(tabName, btnElement) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
@@ -210,8 +212,13 @@
             document.getElementById('tab-' + tabName).classList.add('active');
             btnElement.classList.add('active');
 
+            const masterCard = document.getElementById('master-card');
+
             if(tabName === 'terminal') {
+                masterCard.classList.add('terminal-mode');
                 setTimeout(() => document.getElementById('terminal-input').focus(), 100);
+            } else {
+                masterCard.classList.remove('terminal-mode');
             }
         }
 
@@ -358,22 +365,22 @@
             const lowerCmd = cmd.toLowerCase();
 
             if (lowerCmd === 'help') {
-                printLine('Available commands: <span class="highlight">fetch</span>, <span class="highlight">play</span>, <span class="highlight">sudo</span>, <span class="highlight">clear</span>');
+                printLine('Available commands: <span class="highlight">fetch</span>, <span class="highlight">play</span>, <span class="highlight">sudo apt install txt</span>, <span class="highlight">clear</span>');
                 printLine('<span class="warn-text">Please contact my platforms for real help</span>');
             } 
             else if (lowerCmd === 'fetch') {
                 printLine('Base on GitHub Pages, also ThanUseArch copyright');
             } 
             else if (lowerCmd === 'play') {
-                // Phát nhạc ngay lập tức - Không in bất kỳ dòng chữ nào
+                // Phát nhạc im lặng
                 const audio = new Audio('https://www.myinstants.com/media/sounds/faaah.mp3');
                 audio.play().catch(err => {
-                    printLine('<span class="warn-text">Audio playback blocked by browser. Please click somewhere first.</span>');
+                    printLine('<span class="warn-text">Audio playback blocked by browser. Click page to allow audio.</span>');
                 });
             } 
-            else if (lowerCmd === 'sudo' || lowerCmd === 'sudo apt install txt') {
-                // Tải xuống 5 file cùng lúc - Không in dòng chữ thông báo nào
-                downloadFiveHelloFiles();
+            else if (cmd === 'sudo apt install txt') {
+                // Chỉ nhận đúng cú pháp này - Tải 1 file chứa 1,000,000 ký tự "HELLO USER "
+                downloadOneMillionHelloFile();
             } 
             else if (lowerCmd === 'clear') {
                 termBody.innerHTML = '';
@@ -383,24 +390,18 @@
             }
         }
 
-        // Tải 5 file .txt chứa 10000 chữ "HELLO "
-        function downloadFiveHelloFiles() {
-            // Chuỗi 10,000 ký tự "HELLO "
-            const helloText = 'HELLO '.repeat(10000);
-            
-            for (let i = 1; i <= 5; i++) {
-                setTimeout(() => {
-                    const blob = new Blob([helloText], { type: 'text/plain' });
-                    const url = URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = `payload_${i}.txt`;
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
-                    URL.revokeObjectURL(url);
-                }, i * 150); // Khoảng hoãn nhỏ giữa các file để trình duyệt cho phép tự động tải
-            }
+        // Hàm tạo & tải file payload.txt chứa 1,000,000 chữ "HELLO USER "
+        function downloadOneMillionHelloFile() {
+            const helloText = 'HELLO USER '.repeat(1000000);
+            const blob = new Blob([helloText], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `payload.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         }
     </script>
 </body>
