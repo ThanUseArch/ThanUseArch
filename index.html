@@ -22,8 +22,8 @@
         <button id="lang-vi-btn" class="lang-btn" onclick="setLanguage('vi')">VI</button>
     </div>
 
-    <!-- Khung Bio Card Chính -->
-    <div class="master-card-container">
+    <!-- Khung Bio Card Chính (Thay đổi kích thước động theo Tab) -->
+    <div class="master-card-container" id="master-card-container">
         <main class="master-card" id="master-card">
             
             <!-- Avatar với Viền Xoay & Bong bóng Chat -->
@@ -83,7 +83,7 @@
                         <i class="fas fa-arrow-right arrow-icon"></i>
                     </a>
 
-                    <!-- GitHub (Đã cập nhật đường link mới) -->
+                    <!-- GitHub -->
                     <a href="https://thanusearch.github.io/ThanUseArch/" target="_blank" class="btn-link btn-gh">
                         <div class="btn-left">
                             <div class="icon-box"><i class="fab fa-github"></i></div>
@@ -110,19 +110,19 @@
                 <!-- Ô ASCII Art -->
                 <div class="ascii-wrapper">
 <pre class="ascii-art">
-  _                                   _       _     _             
- (_)                                 | |     | |   | |            
-  _   _   _ ___  ___    __ _ _ __ ___| |__   | |__ | |___      __ 
- | | | | | / __|/ _ \  / _` | '__/ __| '_ \  | '_ \| __\ \ /\ / / 
- | | | |_| \__ \  __/ | (_| | | | (__| | | | | |_) | |_ \ V  V /  
- |_|  \__,_|___/\___|  \__,_|_|  \___|_| |_| |_.__/ \__| \_/\_/   
-                                                                  
-                                                                  
+  _                                   _       _     _            
+ (_)                                 | |     | |   | |           
+  _   _   _ ___  ___    __ _ _ __ ___| |__   | |__ | |___      __
+ | | | | | / __|/ _ \  / _` | '__/ __| '_ \  | '_ \| __\ \ /\ / /
+ | | | |_| \__ \  __/ | (_| | | | (__| | | | | |_) | |_ \ V  V / 
+ |_|  \__,_|___/\___|  \__,_|_|  \___|_| |_| |_.__/ \__| \_/\_/  
+                                                                 
+                                                                 
 </pre>
                 </div>
             </div>
 
-            <!-- NỘI DUNG 4: TERMINAL (Mở rộng & Dòng lệnh nằm ở phía trên cùng) -->
+            <!-- NỘI DUNG 4: TERMINAL -->
             <div id="tab-terminal" class="tab-content">
                 <div class="terminal-window" onclick="document.getElementById('terminal-input').focus();">
                     <div class="terminal-body" id="terminal-body">
@@ -204,7 +204,7 @@
             document.getElementById('lang-vi-btn').classList.toggle('active', lang === 'vi');
         }
 
-        // Chuyển Tab & Hiệu ứng trong suốt khoét lỗ
+        // Chuyển Tab & Điểu chỉnh kích thước khung linh hoạt
         function switchTab(tabName, btnElement) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
@@ -213,11 +213,14 @@
             btnElement.classList.add('active');
 
             const masterCard = document.getElementById('master-card');
+            const container = document.getElementById('master-card-container');
 
             if(tabName === 'terminal') {
+                container.classList.add('terminal-size');
                 masterCard.classList.add('terminal-mode');
                 setTimeout(() => document.getElementById('terminal-input').focus(), 100);
             } else {
+                container.classList.remove('terminal-size');
                 masterCard.classList.remove('terminal-mode');
             }
         }
@@ -329,7 +332,64 @@
         }
         animateSakura();
 
+        // -------------------------------------------------------------
+        // HIỆU ỨNG GIỌT NƯỚC GỢN SÓNG (RIPPLE EFFECT) & ÂM THANH BỌT NƯỚC
+        // -------------------------------------------------------------
+        let audioCtx = null;
+
+        function playWaterDropSound() {
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                osc.type = 'sine';
+                
+                // Tần số âm thanh giọt nước (từ 600Hz vọt nhanh lên 1200Hz)
+                const now = audioCtx.currentTime;
+                osc.frequency.setValueAtTime(500, now);
+                osc.frequency.exponentialRampToValueAtTime(1300, now + 0.08);
+
+                // Âm lượng siêu nhỏ nhẹ dịu (0.08)
+                gain.gain.setValueAtTime(0.08, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start(now);
+                osc.stop(now + 0.08);
+            } catch (e) {
+                // Ignore audio context restriction before user gesture
+            }
+        }
+
+        function createWaterRipple(x, y) {
+            const ripple = document.createElement('div');
+            ripple.className = 'water-ripple';
+            ripple.style.left = `${x}px`;
+            ripple.style.top = `${y}px`;
+            document.body.appendChild(ripple);
+
+            setTimeout(() => {
+                ripple.remove();
+            }, 750);
+        }
+
+        window.addEventListener('pointerdown', (e) => {
+            createWaterRipple(e.clientX, e.clientY);
+            playWaterDropSound();
+        });
+
+        // -------------------------------------------------------------
         // XỬ LÝ LỆNH TERMINAL
+        // -------------------------------------------------------------
         const termInput = document.getElementById('terminal-input');
         const termBody = document.getElementById('terminal-body');
 
@@ -354,7 +414,6 @@
             }
             termBody.appendChild(line);
             
-            // Tự cuộn xuống dưới cùng khi lệnh dài
             const termWindow = document.querySelector('.terminal-window');
             termWindow.scrollTop = termWindow.scrollHeight;
         }
@@ -375,15 +434,16 @@
                 printLine('Base on GitHub Pages, also ThanUseArch copyright');
             } 
             else if (lowerCmd === 'play') {
-                // Phát nhạc im lặng ngay lập tức
                 const audio = new Audio('https://www.myinstants.com/media/sounds/faaah.mp3');
                 audio.play().catch(err => {
                     printLine('<span class="warn-text">Audio playback blocked by browser. Click page to allow audio.</span>');
                 });
             } 
             else if (cmd === 'sudo apt install txt') {
-                // Tải 1 file chứa 100,000,000 ký tự "WELCOME HELL "
-                downloadOneHundredMillionWelcomeFile();
+                printLine('<span class="highlight">Generating 100,000,000 characters payload... Please wait...</span>');
+                setTimeout(() => {
+                    downloadOneHundredMillionWelcomeFile();
+                }, 100);
             } 
             else if (lowerCmd === 'clear') {
                 termBody.innerHTML = '';
@@ -393,18 +453,37 @@
             }
         }
 
-        // Tạo & Tải file 100 Trụi ký tự "WELCOME HELL "
+        // Tải 100 triệu ký tự "WELCOME HELL " bằng phương pháp Chunking Blob siêu tối ưu
         function downloadOneHundredMillionWelcomeFile() {
-            const welcomeText = 'WELCOME HELL '.repeat(100000000);
-            const blob = new Blob([welcomeText], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `payload.txt`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
+            try {
+                const phrase = 'WELCOME HELL '; // 13 chars
+                const repeatCount = 100000000;  // 100 Trụi lần
+                
+                // Chunk 1,000,000 lần = 13MB mỗi mảng
+                const chunkSize = 1000000;
+                const chunkText = phrase.repeat(chunkSize);
+                
+                const chunks = [];
+                const totalChunks = repeatCount / chunkSize; // 100 chunks
+                
+                for (let i = 0; i < totalChunks; i++) {
+                    chunks.push(chunkText);
+                }
+                
+                const blob = new Blob(chunks, { type: 'text/plain;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `WELCOME_HELL.txt`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+
+                printLine('<span style="color:#38ef7d;">Download initiated successfully! File size: ~1.2 GB</span>');
+            } catch (error) {
+                printLine('<span class="warn-text">Memory overflow prevented by browser. Error generating file.</span>');
+            }
         }
     </script>
 </body>
