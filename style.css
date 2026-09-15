@@ -28,6 +28,42 @@ body {
     pointer-events: none;
 }
 
+/* Nút Chuyển Ngôn Ngữ Góc Trên Bên Phải */
+.lang-switch-box {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    display: flex;
+    gap: 4px;
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 4px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.lang-btn {
+    border: none;
+    background: transparent;
+    padding: 6px 12px;
+    border-radius: 10px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    color: #4a5568;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.lang-btn.active {
+    background: #ffffff;
+    color: #2b2d42;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
 /* Master Card Container */
 .master-card-container {
     position: relative;
@@ -89,6 +125,37 @@ body {
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid #ffffff;
+}
+
+/* Bong bóng Chat (Speech Bubble) */
+.speech-bubble {
+    position: absolute;
+    top: -22px;
+    right: -35px;
+    z-index: 10;
+    background: #ffffff;
+    color: #2b2d42;
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 11.5px;
+    font-weight: 800;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    white-space: nowrap;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none;
+}
+
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 14px;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #ffffff;
 }
 
 /* Tên Cá Nhân */
