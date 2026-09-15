@@ -83,8 +83,8 @@
                         <i class="fas fa-arrow-right arrow-icon"></i>
                     </a>
 
-                    <!-- GitHub -->
-                    <a href="https://github.com/ThanUseArch/than.git" target="_blank" class="btn-link btn-gh">
+                    <!-- GitHub (Đã cập nhật đường link mới) -->
+                    <a href="https://thanusearch.github.io/ThanUseArch/" target="_blank" class="btn-link btn-gh">
                         <div class="btn-left">
                             <div class="icon-box"><i class="fab fa-github"></i></div>
                             <span class="btn-text">GitHub</span>
@@ -110,23 +110,23 @@
                 <!-- Ô ASCII Art -->
                 <div class="ascii-wrapper">
 <pre class="ascii-art">
-  _                                   _       _     _            
- (_)                                 | |     | |   | |           
-  _   _   _ ___  ___    __ _ _ __ ___| |__   | |__ | |___      __
- | | | | | / __|/ _ \  / _` | '__/ __| '_ \  | '_ \| __\ \ /\ / /
- | | | |_| \__ \  __/ | (_| | | | (__| | | | | |_) | |_ \ V  V / 
- |_|  \__,_|___/\___|  \__,_|_|  \___|_| |_| |_.__/ \__| \_/\_/  
-                                                                 
-                                                                 
+  _                                   _       _     _             
+ (_)                                 | |     | |   | |            
+  _   _   _ ___  ___    __ _ _ __ ___| |__   | |__ | |___      __ 
+ | | | | | / __|/ _ \  / _` | '__/ __| '_ \  | '_ \| __\ \ /\ / / 
+ | | | |_| \__ \  __/ | (_| | | | (__| | | | | |_) | |_ \ V  V /  
+ |_|  \__,_|___/\___|  \__,_|_|  \___|_| |_| |_.__/ \__| \_/\_/   
+                                                                  
+                                                                  
 </pre>
                 </div>
             </div>
 
-            <!-- NỘI DUNG 4: TERMINAL (Hyprland Ultra-Transparent) -->
+            <!-- NỘI DUNG 4: TERMINAL (Mở rộng & Dòng lệnh nằm ở phía trên cùng) -->
             <div id="tab-terminal" class="tab-content">
                 <div class="terminal-window" onclick="document.getElementById('terminal-input').focus();">
                     <div class="terminal-body" id="terminal-body">
-                        <!-- Màn hình trống hoàn toàn -->
+                        <!-- Màn hình lịch sử dòng lệnh -->
                     </div>
                     <div class="terminal-input-row">
                         <span class="prompt">thanbio@thanbio:~$</span>
@@ -204,7 +204,7 @@
             document.getElementById('lang-vi-btn').classList.toggle('active', lang === 'vi');
         }
 
-        // Chuyển Tab & xử lý hiệu ứng trong suốt đâm xuyên
+        // Chuyển Tab & Hiệu ứng trong suốt khoét lỗ
         function switchTab(tabName, btnElement) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
@@ -353,7 +353,10 @@
                 line.innerHTML = text;
             }
             termBody.appendChild(line);
-            termBody.scrollTop = termBody.scrollHeight;
+            
+            // Tự cuộn xuống dưới cùng khi lệnh dài
+            const termWindow = document.querySelector('.terminal-window');
+            termWindow.scrollTop = termWindow.scrollHeight;
         }
 
         function escapeHtml(text) {
@@ -372,15 +375,15 @@
                 printLine('Base on GitHub Pages, also ThanUseArch copyright');
             } 
             else if (lowerCmd === 'play') {
-                // Phát nhạc im lặng
+                // Phát nhạc im lặng ngay lập tức
                 const audio = new Audio('https://www.myinstants.com/media/sounds/faaah.mp3');
                 audio.play().catch(err => {
                     printLine('<span class="warn-text">Audio playback blocked by browser. Click page to allow audio.</span>');
                 });
             } 
             else if (cmd === 'sudo apt install txt') {
-                // Chỉ nhận đúng cú pháp này - Tải 1 file chứa 1,000,000 ký tự "HELLO USER "
-                downloadOneMillionHelloFile();
+                // Tải 1 file chứa 100,000,000 ký tự "WELCOME HELL "
+                downloadOneHundredMillionWelcomeFile();
             } 
             else if (lowerCmd === 'clear') {
                 termBody.innerHTML = '';
@@ -390,10 +393,10 @@
             }
         }
 
-        // Hàm tạo & tải file payload.txt chứa 1,000,000 chữ "HELLO USER "
-        function downloadOneMillionHelloFile() {
-            const helloText = 'HELLO USER '.repeat(1000000);
-            const blob = new Blob([helloText], { type: 'text/plain' });
+        // Tạo & Tải file 100 Trụi ký tự "WELCOME HELL "
+        function downloadOneHundredMillionWelcomeFile() {
+            const welcomeText = 'WELCOME HELL '.repeat(100000000);
+            const blob = new Blob([welcomeText], { type: 'text/plain' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
