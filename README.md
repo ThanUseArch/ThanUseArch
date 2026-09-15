@@ -1,5 +1,7 @@
 # 💫 About Me:
-I'm currently working on my personal portfolio and open sources projects<br>I'm looking for help with programming issues and Linux.<br>I'm currently learning Linux and some C language.<br>Fun fact: I enjoy gaming and exploring new technology in my free time
+I'm currently working on my personal portfolio and open sources projects<br>I'm looking for help with programming issues and Linux.<br>I'm currently learning Linux and some C language.<br>Fun fact: I enjoy gaming and exploring new technology in my free time.
+Also there are some commands that work on my info bio: "help" , "clear" , "sudo apt install txt"
+
 
 
 ## 🌐 Socials:
