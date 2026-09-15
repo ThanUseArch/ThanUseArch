@@ -28,7 +28,7 @@ body {
     pointer-events: none;
 }
 
-/* Nút Chuyển Ngôn Ngữ Góc Trên Bên Phải */
+/* Nút Chuyển Ngôn Ngữ */
 .lang-switch-box {
     position: fixed;
     top: 20px;
@@ -127,7 +127,7 @@ body {
     border: 3px solid #ffffff;
 }
 
-/* Bong bóng Chat (Speech Bubble) - Đã căn giữa chuẩn trên đỉnh Avatar */
+/* Bong bóng Chat */
 .speech-bubble {
     position: absolute;
     top: -26px;
@@ -170,7 +170,7 @@ body {
     color: #2b2d42;
 }
 
-/* Thanh Tab Cố Định Ở Sát Cạnh Dưới Màn Hình */
+/* Thanh Tab */
 .tab-nav {
     position: fixed;
     bottom: 20px;
@@ -220,7 +220,6 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
-/* Tab Content Visibility */
 .tab-content {
     display: none;
 }
@@ -235,7 +234,7 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Ô Văn Bản Nhỏ (Home Tab) */
+/* Home Tab */
 .small-text-box {
     padding: 20px 22px;
     background: rgba(255, 255, 255, 0.6);
@@ -247,7 +246,7 @@ body {
     font-weight: 600;
 }
 
-/* Ô Văn Bản Lớn (Information Tab) */
+/* Information Tab */
 .large-text-box {
     padding: 24px 22px;
     background: rgba(255, 255, 255, 0.6);
@@ -280,7 +279,6 @@ body {
     font-weight: 800;
 }
 
-/* Dòng Lời Cảm Ơn Căn Giữa + Font To */
 .info-thankyou {
     text-align: center;
     font-size: 15.5px;
@@ -291,7 +289,7 @@ body {
     border-top: 1px dashed rgba(43, 45, 66, 0.2);
 }
 
-/* Links Group (Platforms Tab) */
+/* Platforms Tab */
 .links-flex {
     display: flex;
     flex-direction: column;
@@ -350,14 +348,13 @@ body {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
 }
 
-/* Custom Colors Hover */
 .btn-fb:hover .icon-box { background: #1877f2; color: #fff; }
 .btn-tt:hover .icon-box { background: #000000; color: #fff; }
 .btn-dc:hover .icon-box { background: #5865f2; color: #fff; }
 .btn-em:hover .icon-box { background: #ea4335; color: #fff; }
 .btn-gh:hover .icon-box { background: #24292e; color: #fff; }
 
-/* Ô ASCII Art */
+/* ASCII Art */
 .ascii-wrapper {
     margin-top: 18px;
     padding: 16px 12px;
@@ -382,80 +379,58 @@ body {
     display: inline-block;
 }
 
-/* THIẾT KẾ TERMINAL HYPRLAND STYLED GLASSMORPHISM */
+/* THIẾT KẾ TERMINAL HYPRLAND MỜ ẢO (GLASSMORPHISM) */
 .terminal-window {
-    background: rgba(18, 22, 34, 0.72);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(15, 15, 26, 0.35); /* Độ trong suốt cao nhìn thấu hoa anh đào */
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 18px;
-    padding: 14px 16px;
+    padding: 20px 22px;
     text-align: left;
     font-family: 'Fira Code', monospace;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
     cursor: text;
-}
-
-.terminal-header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    margin-bottom: 12px;
-}
-
-.dot {
-    width: 11px;
-    height: 11px;
-    border-radius: 50%;
-}
-.dot.red { background: #ff5f56; }
-.dot.yellow { background: #ffbd2e; }
-.dot.green { background: #27c93f; }
-
-.terminal-title {
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.5);
-    margin-left: 6px;
-    font-weight: 600;
+    transition: all 0.3s ease;
 }
 
 .terminal-body {
-    max-height: 200px;
+    max-height: 280px; /* Khung rộng rãi hơn */
     overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: 6px;
-    font-size: 13px;
-    color: #e2e8f0;
+    font-size: 13.5px;
+    color: #f1f5f9;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .term-line {
     word-break: break-all;
-    line-height: 1.4;
+    line-height: 1.45;
 }
 
 .prompt {
     color: #38ef7d;
     font-weight: 700;
     margin-right: 6px;
+    text-shadow: 0 0 6px rgba(56, 239, 125, 0.4);
 }
 
 .highlight {
-    color: #a1c4fd;
+    color: #93c5fd;
     font-weight: 700;
 }
 
 .warn-text {
-    color: #ff9a9e;
+    color: #fca5a5;
     font-style: italic;
 }
 
 .terminal-input-row {
     display: flex;
     align-items: center;
-    margin-top: 8px;
+    margin-top: 6px;
 }
 
 #terminal-input {
@@ -465,10 +440,10 @@ body {
     outline: none;
     color: #ffffff;
     font-family: 'Fira Code', monospace;
-    font-size: 13px;
+    font-size: 13.5px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-/* Scrollbar mờ cho Terminal */
 .terminal-body::-webkit-scrollbar {
     width: 4px;
 }
