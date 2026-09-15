@@ -28,6 +28,39 @@ body {
     pointer-events: none;
 }
 
+/* HIỆU ỨNG GIỌT NƯỚC RIPPLE KHI CLICK / CHẠM */
+.water-ripple {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.25);
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: none;
+    z-index: 9999;
+    animation: rippleAnimation 0.75s ease-out forwards;
+}
+
+@keyframes rippleAnimation {
+    0% {
+        width: 10px;
+        height: 10px;
+        opacity: 0.9;
+        border-width: 3px;
+    }
+    50% {
+        opacity: 0.6;
+        border-width: 2px;
+    }
+    100% {
+        width: 110px;
+        height: 110px;
+        opacity: 0;
+        border-width: 1px;
+    }
+}
+
 /* Nút Chuyển Ngôn Ngữ */
 .lang-switch-box {
     position: fixed;
@@ -64,15 +97,20 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Master Card Container - Mở rộng thêm 50% độ rộng */
+/* Master Card Container - Đặt max-width mặc định 480px cho Home, Platforms, Info */
 .master-card-container {
     position: relative;
     z-index: 1;
     width: 100%;
-    max-width: 720px; 
+    max-width: 480px; 
     padding: 1px;
     border-radius: 30px;
-    transition: all 0.3s ease;
+    transition: max-width 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Khi ở Tab Terminal, mở rộng kích thước rộng gấp đôi (720px) */
+.master-card-container.terminal-size {
+    max-width: 720px;
 }
 
 .master-card {
@@ -88,7 +126,7 @@ body {
     transition: background 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
 }
 
-/* Chế độ Terminal: Ẩn hoàn toàn khung đằng sau để hoa anh đào đâm xuyên qua */
+/* Chế độ Terminal: Ẩn khung trắng đằng sau */
 .master-card.terminal-mode {
     background: transparent;
     border-color: transparent;
@@ -181,7 +219,7 @@ body {
     color: #2b2d42;
 }
 
-/* Thanh Tab */
+/* Thanh Tab Navigation */
 .tab-nav {
     position: fixed;
     bottom: 20px;
@@ -390,9 +428,9 @@ body {
     display: inline-block;
 }
 
-/* THIẾT KẾ TERMINAL TO GẤP ĐÔI & ĐÒNG LỆNH ĐẦU TRANG */
+/* TERMINAL WINDOW */
 .terminal-window {
-    background: rgba(18, 18, 30, 0.35); /* Tối mờ ảo nhìn xuyên qua */
+    background: rgba(18, 18, 30, 0.35);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1.5px solid rgba(255, 255, 255, 0.35);
@@ -403,11 +441,11 @@ body {
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
     cursor: text;
     transition: all 0.3s ease;
-    height: 380px; /* Chiều cao cố định to rộng */
+    height: 380px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Giúp dòng lệnh bắt đầu ngay từ trên đỉnh */
+    justify-content: flex-start;
 }
 
 .terminal-body {
@@ -427,7 +465,6 @@ body {
     gap: 8px;
 }
 
-/* Cỡ chữ Prompt đồng bộ chuẩn */
 .prompt {
     color: #38ef7d;
     font-weight: 700;
