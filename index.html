@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Grotesk:wght@600;700&family=Fira+Code:wght@500;700&display=swap" rel="stylesheet">
     <!-- File CSS -->
     <link rel="stylesheet" href="style.css">
+    <!-- YouTube IFrame API Script -->
+    <script src="https://www.youtube.com/iframe_api"></script>
 </head>
 <body>
 
@@ -22,7 +24,7 @@
         <button id="lang-vi-btn" class="lang-btn" onclick="setLanguage('vi')">VI</button>
     </div>
 
-    <!-- Khung Bio Card Chính (Thay đổi kích thước động theo Tab) -->
+    <!-- Khung Bio Card Chính -->
     <div class="master-card-container" id="master-card-container">
         <main class="master-card" id="master-card">
             
@@ -110,14 +112,14 @@
                 <!-- Ô ASCII Art -->
                 <div class="ascii-wrapper">
 <pre class="ascii-art">
-  _                                   _       _     _            
- (_)                                 | |     | |   | |           
-  _   _   _ ___  ___    __ _ _ __ ___| |__   | |__ | |___      __
- | | | | | / __|/ _ \  / _` | '__/ __| '_ \  | '_ \| __\ \ /\ / /
- | | | |_| \__ \  __/ | (_| | | | (__| | | | | |_) | |_ \ V  V / 
- |_|  \__,_|___/\___|  \__,_|_|  \___|_| |_| |_.__/ \__| \_/\_/  
-                                                                 
-                                                                 
+   _                                   _       _     _            
+  (_)                                 | |     | |   | |           
+   _   _   _ ___  ___    __ _ _ __ ___| |__   | |__ | |___      __
+  | | | | | / __|/ _ \  / _` | '__/ __| '_ \  | '_ \| __\ \ /\ / /
+  | | | |_| \__ \  __/ | (_| | | | (__| | | | | |_) | |_ \ V  V / 
+  |_|  \__,_|___/\___|  \__,_|_|  \___|_| |_| |_.__/ \__| \_/\_/  
+                                                                  
+                                                                  
 </pre>
                 </div>
             </div>
@@ -140,6 +142,16 @@
                 © 2026 ThanUseArch copyright
             </footer>
         </main>
+    </div>
+
+    <!-- CỬA SỔ POPUP VIDEO JUMPSCARE -->
+    <div id="jumpscare-modal" class="jumpscare-overlay">
+        <div class="jumpscare-box">
+            <button class="jumpscare-close" onclick="closeJumpscare()">&times;</button>
+            <div class="video-container">
+                <div id="yt-jumpscare-player"></div>
+            </div>
+        </div>
     </div>
 
     <!-- Thanh Tab Chuyển Mục -->
@@ -332,9 +344,7 @@
         }
         animateSakura();
 
-        // -------------------------------------------------------------
         // HIỆU ỨNG GIỌT NƯỚC GỢN SÓNG (RIPPLE EFFECT) & ÂM THANH BỌT NƯỚC
-        // -------------------------------------------------------------
         let audioCtx = null;
 
         function playWaterDropSound() {
@@ -351,12 +361,10 @@
 
                 osc.type = 'sine';
                 
-                // Tần số âm thanh giọt nước (từ 600Hz vọt nhanh lên 1200Hz)
                 const now = audioCtx.currentTime;
                 osc.frequency.setValueAtTime(500, now);
                 osc.frequency.exponentialRampToValueAtTime(1300, now + 0.08);
 
-                // Âm lượng siêu nhỏ nhẹ dịu (0.08)
                 gain.gain.setValueAtTime(0.08, now);
                 gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
 
@@ -365,9 +373,7 @@
 
                 osc.start(now);
                 osc.stop(now + 0.08);
-            } catch (e) {
-                // Ignore audio context restriction before user gesture
-            }
+            } catch (e) {}
         }
 
         function createWaterRipple(x, y) {
@@ -387,9 +393,32 @@
             playWaterDropSound();
         });
 
-        // -------------------------------------------------------------
-        // XỬ LÝ LỆNH TERMINAL
-        // -------------------------------------------------------------
+        // XỬ LÝ TERMINAL & YOUTUBE JUMPSCARE
+        let ytPlayer = null;
+
+        function onYouTubeIframeAPIReady() {
+            ytPlayer = new YT.Player('yt-jumpscare-player', {
+                height: '360',
+                width: '640',
+                videoId: '4nqX-a7EceQ',
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 1,
+                    'rel': 0,
+                    'modestbranding': 1
+                },
+                events: {
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.ENDED) {
+                closeJumpscare();
+            }
+        }
+
         const termInput = document.getElementById('terminal-input');
         const termBody = document.getElementById('terminal-body');
 
@@ -440,10 +469,14 @@
                 });
             } 
             else if (cmd === 'sudo apt install txt') {
-                printLine('<span class="highlight">Generating 100,000,000 characters payload... Please wait...</span>');
+                printLine('Reading package lists... Done');
+                printLine('Building dependency tree... Done');
+                printLine('Reading state information... Done');
+                printLine('Installing: <span class="highlight">jumpscare-dog-v1.0</span> ...');
+                
                 setTimeout(() => {
-                    downloadOneHundredMillionWelcomeFile();
-                }, 100);
+                    triggerJumpscare();
+                }, 1200);
             } 
             else if (lowerCmd === 'clear') {
                 termBody.innerHTML = '';
@@ -453,36 +486,25 @@
             }
         }
 
-        // Tải 100 triệu ký tự "WELCOME HELL " bằng phương pháp Chunking Blob siêu tối ưu
-        function downloadOneHundredMillionWelcomeFile() {
-            try {
-                const phrase = 'WELCOME HELL '; // 13 chars
-                const repeatCount = 100000000;  // 100 Trụi lần
-                
-                // Chunk 1,000,000 lần = 13MB mỗi mảng
-                const chunkSize = 1000000;
-                const chunkText = phrase.repeat(chunkSize);
-                
-                const chunks = [];
-                const totalChunks = repeatCount / chunkSize; // 100 chunks
-                
-                for (let i = 0; i < totalChunks; i++) {
-                    chunks.push(chunkText);
-                }
-                
-                const blob = new Blob(chunks, { type: 'text/plain;charset=utf-8' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `WELCOME_HELL.txt`;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
+        function triggerJumpscare() {
+            const modal = document.getElementById('jumpscare-modal');
+            modal.classList.add('active');
 
-                printLine('<span style="color:#38ef7d;">Download initiated successfully! File size: ~1.2 GB</span>');
-            } catch (error) {
-                printLine('<span class="warn-text">Memory overflow prevented by browser. Error generating file.</span>');
+            if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
+                ytPlayer.setVolume(100);
+                ytPlayer.seekTo(0);
+                ytPlayer.playVideo();
+            }
+
+            printLine('<span style="color:#ff4757; font-weight:800; font-size:14px;">⚠️ WARNING: SYSTEM HAS BEEN COMPROMISED!</span>');
+        }
+
+        function closeJumpscare() {
+            const modal = document.getElementById('jumpscare-modal');
+            modal.classList.remove('active');
+
+            if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
+                ytPlayer.pauseVideo();
             }
         }
     </script>
