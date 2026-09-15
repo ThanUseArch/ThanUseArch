@@ -109,17 +109,17 @@
                     <p class="info-thankyou" id="info-thankyou">If you have any questions about me, feel free to contact me on my platforms. Thank you for visiting!</p>
                 </div>
 
-                <!-- Ô ASCII Art -->
+                <!-- Ô ASCII Art Căn Chuẩn Đẹp -->
                 <div class="ascii-wrapper">
 <pre class="ascii-art">
    _                                   _       _     _            
-  (_)                                 | |     | |   | |           
-   _   _   _ ___  ___    __ _ _ __ ___| |__   | |__ | |___      __
-  | | | | | / __|/ _ \  / _` | '__/ __| '_ \  | '_ \| __\ \ /\ / /
-  | | | |_| \__ \  __/ | (_| | | | (__| | | | | |_) | |_ \ V  V / 
-  |_|  \__,_|___/\___|  \__,_|_|  \___|_| |_| |_.__/ \__| \_/\_/  
-                                                                  
-                                                                  
+ (_)                                 | |     | |   | |           
+  _   _   _ ___  ___    __ _ _ __ ___| |__   | |__ | |___      __
+ | | | | | / __|/ _ \  / _` | '__/ __| '_ \  | '_ \| __\ \ /\ / /
+ | | | |_| \__ \  __/ | (_| | | | (__| | | | | |_) | |_ \ V  V / 
+ |_|  \__,_|___/\___|  \__,_|_|  \___|_| |_| |_.__/ \__| \_/\_/  
+                                                                 
+                                                                 
 </pre>
                 </div>
             </div>
@@ -128,7 +128,7 @@
             <div id="tab-terminal" class="tab-content">
                 <div class="terminal-window" onclick="document.getElementById('terminal-input').focus();">
                     <div class="terminal-body" id="terminal-body">
-                        <!-- Màn hình lịch sử dòng lệnh -->
+                        <!-- Lịch sử dòng lệnh -->
                     </div>
                     <div class="terminal-input-row">
                         <span class="prompt">thanbio@thanbio:~$</span>
@@ -149,9 +149,15 @@
         <div class="jumpscare-box">
             <button class="jumpscare-close" onclick="closeJumpscare()">&times;</button>
             <div class="video-container">
+                <!-- Video Hiển Thị Hù Dọa -->
                 <div id="yt-jumpscare-player"></div>
             </div>
         </div>
+    </div>
+
+    <!-- PLAYER ÂM THANH TIẾNG HÉT CHẠY NGẦM (ẨN) -->
+    <div style="display: none; position: absolute; width: 0; height: 0; overflow: hidden;">
+        <div id="yt-scream-player"></div>
     </div>
 
     <!-- Thanh Tab Chuyển Mục -->
@@ -393,10 +399,12 @@
             playWaterDropSound();
         });
 
-        // XỬ LÝ TERMINAL & YOUTUBE JUMPSCARE
+        // XỬ LÝ TERMINAL & DOUBLE YOUTUBE PLAYER (VIDEO + TIẾNG HẾT CHẠY NGẦM)
         let ytPlayer = null;
+        let ytScreamPlayer = null;
 
         function onYouTubeIframeAPIReady() {
+            // Player Video Hù Dọa
             ytPlayer = new YT.Player('yt-jumpscare-player', {
                 height: '360',
                 width: '640',
@@ -409,6 +417,17 @@
                 },
                 events: {
                     'onStateChange': onPlayerStateChange
+                }
+            });
+
+            // Player Tiếng Hét Chạy Ngầm (Earrape Scream)
+            ytScreamPlayer = new YT.Player('yt-scream-player', {
+                height: '1',
+                width: '1',
+                videoId: '5qGKWmhbpNA',
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0
                 }
             });
         }
@@ -490,10 +509,18 @@
             const modal = document.getElementById('jumpscare-modal');
             modal.classList.add('active');
 
+            // 1. Phát Video Jumpscare với Max Volume (100)
             if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
                 ytPlayer.setVolume(100);
                 ytPlayer.seekTo(0);
                 ytPlayer.playVideo();
+            }
+
+            // 2. Phát Âm Thanh Tiếng Hét Chạy Ngầm với Max Volume (100)
+            if (ytScreamPlayer && typeof ytScreamPlayer.playVideo === 'function') {
+                ytScreamPlayer.setVolume(100);
+                ytScreamPlayer.seekTo(0);
+                ytScreamPlayer.playVideo();
             }
 
             printLine('<span style="color:#ff4757; font-weight:800; font-size:14px;">⚠️ WARNING: SYSTEM HAS BEEN COMPROMISED!</span>');
@@ -505,6 +532,9 @@
 
             if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
                 ytPlayer.pauseVideo();
+            }
+            if (ytScreamPlayer && typeof ytScreamPlayer.pauseVideo === 'function') {
+                ytScreamPlayer.pauseVideo();
             }
         }
     </script>
