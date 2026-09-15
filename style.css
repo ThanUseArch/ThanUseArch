@@ -17,7 +17,7 @@ body {
     overflow-x: hidden;
 }
 
-/* Canvas Hoa Anh Đào */
+/* Canvas Nền Hoa Anh Đào */
 #sakura-canvas {
     position: fixed;
     top: 0;
@@ -69,11 +69,9 @@ body {
     position: relative;
     z-index: 1;
     width: 100%;
-    max-width: 540px;
+    max-width: 560px;
     padding: 1px;
     border-radius: 30px;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08),
-                0 10px 20px rgba(255, 255, 255, 0.4) inset;
 }
 
 .master-card {
@@ -84,6 +82,18 @@ body {
     border-radius: 29px;
     padding: 38px 28px 28px 28px;
     text-align: center;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08),
+                0 10px 20px rgba(255, 255, 255, 0.4) inset;
+    transition: background 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+}
+
+/* Chế độ Terminal: Loại bỏ hoàn toàn nền trắng đằng sau để khoét lỗ thấy Hoa Anh Đào */
+.master-card.terminal-mode {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
 }
 
 /* Avatar Box */
@@ -379,42 +389,52 @@ body {
     display: inline-block;
 }
 
-/* THIẾT KẾ TERMINAL HYPRLAND MỜ ẢO (GLASSMORPHISM) */
+/* THIẾT KẾ TERMINAL HYPRLAND - TRONG SUỐT HOÀN HẢO */
 .terminal-window {
-    background: rgba(15, 15, 26, 0.35); /* Độ trong suốt cao nhìn thấu hoa anh đào */
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 18px;
-    padding: 20px 22px;
+    background: rgba(18, 18, 30, 0.35); /* Tối nhẹ mờ ảo */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1.5px solid rgba(255, 255, 255, 0.35);
+    border-radius: 20px;
+    padding: 22px 24px;
     text-align: left;
     font-family: 'Fira Code', monospace;
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
     cursor: text;
     transition: all 0.3s ease;
+    min-height: 260px; /* Tăng kích thước chiều dài khung */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
 .terminal-body {
-    max-height: 280px; /* Khung rộng rãi hơn */
+    max-height: 480px; /* Khung rộng thoải mái */
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    font-size: 13.5px;
-    color: #f1f5f9;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    gap: 8px;
+    font-size: 14px; /* Cỡ chữ đồng bộ */
+    color: #f8fafc;
 }
 
 .term-line {
     word-break: break-all;
-    line-height: 1.45;
+    line-height: 1.5;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
+/* Prompt chuẩn đồng bộ cỡ chữ trước & sau khi gửi */
 .prompt {
     color: #38ef7d;
     font-weight: 700;
-    margin-right: 6px;
-    text-shadow: 0 0 6px rgba(56, 239, 125, 0.4);
+    font-size: 14px; /* Đảm bảo bằng 14px */
+    line-height: 1.5;
+    white-space: nowrap;
+    text-shadow: 0 0 8px rgba(56, 239, 125, 0.3);
 }
 
 .highlight {
@@ -430,6 +450,7 @@ body {
 .terminal-input-row {
     display: flex;
     align-items: center;
+    gap: 8px;
     margin-top: 6px;
 }
 
@@ -440,15 +461,16 @@ body {
     outline: none;
     color: #ffffff;
     font-family: 'Fira Code', monospace;
-    font-size: 13.5px;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    font-size: 14px; /* Đảm bảo chữ nhập bằng đúng 14px của prompt */
+    line-height: 1.5;
+    font-weight: 500;
 }
 
 .terminal-body::-webkit-scrollbar {
     width: 4px;
 }
 .terminal-body::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.25);
     border-radius: 4px;
 }
 
