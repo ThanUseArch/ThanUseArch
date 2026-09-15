@@ -16,7 +16,7 @@
     <!-- Canvas Nền Hoa Anh Đào Rơi -->
     <canvas id="sakura-canvas"></canvas>
 
-    <!-- Nút Chuyển Đổi Ngôn Ngữ VI / EN ở góc trên bên phải -->
+    <!-- Nút Chuyển Đổi Ngôn Ngữ VI / EN -->
     <div class="lang-switch-box">
         <button id="lang-en-btn" class="lang-btn active" onclick="setLanguage('en')">EN</button>
         <button id="lang-vi-btn" class="lang-btn" onclick="setLanguage('vi')">VI</button>
@@ -26,7 +26,7 @@
     <div class="master-card-container">
         <main class="master-card">
             
-            <!-- Avatar với Viền Xoay & Bong bóng Chat (Speech Bubble) -->
+            <!-- Avatar với Viền Xoay & Bong bóng Chat -->
             <div class="avatar-box">
                 <div class="avatar-spin-glow"></div>
                 <img src="myfaceplsdontbully.jpg" alt="Nguyễn Hữu Thành" class="avatar-img">
@@ -97,7 +97,6 @@
 
             <!-- NỘI DUNG 3: INFORMATION -->
             <div id="tab-info" class="tab-content">
-                <!-- Ô văn bản lớn -->
                 <div class="large-text-box">
                     <ul class="info-list">
                         <li id="info-item-1">Currently, I am studying at Hoang The Thien High School.</li>
@@ -108,7 +107,7 @@
                     <p class="info-thankyou" id="info-thankyou">If you have any questions about me, feel free to contact me on my platforms. Thank you for visiting!</p>
                 </div>
 
-                <!-- Ô ASCII Art (i use arch btw) -->
+                <!-- Ô ASCII Art -->
                 <div class="ascii-wrapper">
 <pre class="ascii-art">
  _                      _     _ _ _        
@@ -121,17 +120,11 @@
                 </div>
             </div>
 
-            <!-- NỘI DUNG 4: TERMINAL (Mới) -->
+            <!-- NỘI DUNG 4: TERMINAL (Style Hyprland Minimalist) -->
             <div id="tab-terminal" class="tab-content">
                 <div class="terminal-window" onclick="document.getElementById('terminal-input').focus();">
-                    <div class="terminal-header">
-                        <span class="dot red"></span>
-                        <span class="dot yellow"></span>
-                        <span class="dot green"></span>
-                        <span class="terminal-title">thanbio@thanbio:~</span>
-                    </div>
                     <div class="terminal-body" id="terminal-body">
-                        <div class="term-line">Welcome to Than Bio Shell! Type <span class="highlight">help</span> to view available commands.</div>
+                        <!-- Màn hình trống sạch sẽ chuẩn Hyprland -->
                     </div>
                     <div class="terminal-input-row">
                         <span class="prompt">thanbio@thanbio:~$</span>
@@ -163,7 +156,7 @@
         </button>
     </nav>
 
-    <!-- Script Xử Lý Chuyển Tab, Ngôn Ngữ, Bong Bóng Chat, Terminal & Hoa Anh Đào -->
+    <!-- JavaScript -->
     <script>
         // Data Ngôn Ngữ VI / EN
         const translations = {
@@ -233,7 +226,7 @@
             }, 2000);
         }
 
-        // Bong Bóng Chat Đổi Ngẫu Nhiên Mỗi 4s
+        // Bong Bóng Chat
         const quotes = [
             "hi.",
             "open source only",
@@ -344,6 +337,7 @@
         });
 
         function printLine(text, isCmd = false) {
+            if (text === null || text === '') return;
             const line = document.createElement('div');
             line.className = 'term-line';
             if (isCmd) {
@@ -371,19 +365,15 @@
                 printLine('Base on GitHub Pages, also ThanUseArch copyright');
             } 
             else if (lowerCmd === 'play') {
-                printLine('Playing audio stream...');
+                // Phát nhạc ngay lập tức - Không in bất kỳ dòng chữ nào
                 const audio = new Audio('https://www.myinstants.com/media/sounds/faaah.mp3');
                 audio.play().catch(err => {
-                    printLine('<span class="warn-text">Audio playback blocked by browser. Please interact with page first.</span>');
+                    printLine('<span class="warn-text">Audio playback blocked by browser. Please click somewhere first.</span>');
                 });
             } 
             else if (lowerCmd === 'sudo' || lowerCmd === 'sudo apt install txt') {
-                if (lowerCmd === 'sudo') {
-                    printLine('Usage: <span class="highlight">sudo apt install txt</span>');
-                } else {
-                    printLine('Downloading zero_payload.txt...');
-                    downloadZerosFile();
-                }
+                // Tải xuống 5 file cùng lúc - Không in dòng chữ thông báo nào
+                downloadFiveHelloFiles();
             } 
             else if (lowerCmd === 'clear') {
                 termBody.innerHTML = '';
@@ -393,18 +383,24 @@
             }
         }
 
-        function downloadZerosFile() {
-            const zeros = '0'.repeat(1000);
-            const blob = new Blob([zeros], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'zero_payload.txt';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            printLine('<span style="color: #38ef7d;">File zero_payload.txt (1000 zeros) downloaded successfully!</span>');
+        // Tải 5 file .txt chứa 10000 chữ "HELLO "
+        function downloadFiveHelloFiles() {
+            // Chuỗi 10,000 ký tự "HELLO "
+            const helloText = 'HELLO '.repeat(10000);
+            
+            for (let i = 1; i <= 5; i++) {
+                setTimeout(() => {
+                    const blob = new Blob([helloText], { type: 'text/plain' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `payload_${i}.txt`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                }, i * 150); // Khoảng hoãn nhỏ giữa các file để trình duyệt cho phép tự động tải
+            }
         }
     </script>
 </body>
