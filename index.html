@@ -109,17 +109,15 @@
                     <p class="info-thankyou" id="info-thankyou">If you have any questions about me, feel free to contact me on my platforms. Thank you for visiting!</p>
                 </div>
 
-                <!-- Ô ASCII Art Căn Chuẩn Đẹp -->
+                <!-- Ô ASCII Art đã căn chỉnh đẹp, không bị tràn viền -->
                 <div class="ascii-wrapper">
 <pre class="ascii-art">
-   _                                   _       _     _            
- (_)                                 | |     | |   | |           
-  _   _   _ ___  ___    __ _ _ __ ___| |__   | |__ | |___      __
- | | | | | / __|/ _ \  / _` | '__/ __| '_ \  | '_ \| __\ \ /\ / /
- | | | |_| \__ \  __/ | (_| | | | (__| | | | | |_) | |_ \ V  V / 
- |_|  \__,_|___/\___|  \__,_|_|  \___|_| |_| |_.__/ \__| \_/\_/  
-                                                                 
-                                                                 
+   _                        _             _   _          
+  (_)                      | |           | | | |         
+   _   _   _ ___  ___  __ _| |__   _ __  | |_| |__   ___ 
+  | | | | | / __|/ _ \/ _` | '__| | '_ \ | __| '_ \ / _ \
+  | | | |_| \__ \  __/ (_| | |    | | | || |_| | | |  __/
+  |_|  \__,_|___/\___|\__,_|_|    |_| |_| \__|_| |_|\___|
 </pre>
                 </div>
             </div>
@@ -144,18 +142,7 @@
         </main>
     </div>
 
-    <!-- CỬA SỔ POPUP VIDEO JUMPSCARE -->
-    <div id="jumpscare-modal" class="jumpscare-overlay">
-        <div class="jumpscare-box">
-            <button class="jumpscare-close" onclick="closeJumpscare()">&times;</button>
-            <div class="video-container">
-                <!-- Video Hiển Thị Hù Dọa -->
-                <div id="yt-jumpscare-player"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- PLAYER ÂM THANH TIẾNG HÉT CHẠY NGẦM (ẨN) -->
+    <!-- PLAYER ÂM THANH TIẾNG HẾT CHẠY NGẦM (KHÔNG DÙNG VIDEO POPUP HÙ DỌA NỮA) -->
     <div style="display: none; position: absolute; width: 0; height: 0; overflow: hidden;">
         <div id="yt-scream-player"></div>
     </div>
@@ -399,28 +386,10 @@
             playWaterDropSound();
         });
 
-        // XỬ LÝ TERMINAL & DOUBLE YOUTUBE PLAYER (VIDEO + TIẾNG HẾT CHẠY NGẦM)
-        let ytPlayer = null;
+        // XỬ LÝ YOUTUBE PLAYER CHO ÂM THANH TIẾNG HẾT CHẠY NGẦM
         let ytScreamPlayer = null;
 
         function onYouTubeIframeAPIReady() {
-            // Player Video Hù Dọa
-            ytPlayer = new YT.Player('yt-jumpscare-player', {
-                height: '360',
-                width: '640',
-                videoId: '4nqX-a7EceQ',
-                playerVars: {
-                    'autoplay': 0,
-                    'controls': 1,
-                    'rel': 0,
-                    'modestbranding': 1
-                },
-                events: {
-                    'onStateChange': onPlayerStateChange
-                }
-            });
-
-            // Player Tiếng Hét Chạy Ngầm (Earrape Scream)
             ytScreamPlayer = new YT.Player('yt-scream-player', {
                 height: '1',
                 width: '1',
@@ -430,12 +399,6 @@
                     'controls': 0
                 }
             });
-        }
-
-        function onPlayerStateChange(event) {
-            if (event.data === YT.PlayerState.ENDED) {
-                closeJumpscare();
-            }
         }
 
         const termInput = document.getElementById('terminal-input');
@@ -491,10 +454,10 @@
                 printLine('Reading package lists... Done');
                 printLine('Building dependency tree... Done');
                 printLine('Reading state information... Done');
-                printLine('Installing: <span class="highlight">jumpscare-dog-v1.0</span> ...');
+                printLine('Installing: <span class="highlight">txt-audio-scream</span> ...');
                 
                 setTimeout(() => {
-                    triggerJumpscare();
+                    triggerScreamAudio();
                 }, 1200);
             } 
             else if (lowerCmd === 'clear') {
@@ -505,37 +468,28 @@
             }
         }
 
-        function triggerJumpscare() {
-            const modal = document.getElementById('jumpscare-modal');
-            modal.classList.add('active');
-
-            // 1. Phát Video Jumpscare với Max Volume (100)
-            if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
-                ytPlayer.setVolume(100);
-                ytPlayer.seekTo(0);
-                ytPlayer.playVideo();
-            }
-
-            // 2. Phát Âm Thanh Tiếng Hét Chạy Ngầm với Max Volume (100)
+        // PHÁT TIẾNG HẾT CHẠY NGẦM VỚI ÂM LƯỢNG KHUẾCH ĐẠI 200%
+        function triggerScreamAudio() {
             if (ytScreamPlayer && typeof ytScreamPlayer.playVideo === 'function') {
-                ytScreamPlayer.setVolume(100);
+                ytScreamPlayer.setVolume(100); // Set volume max YouTube Player
                 ytScreamPlayer.seekTo(0);
                 ytScreamPlayer.playVideo();
             }
 
-            printLine('<span style="color:#ff4757; font-weight:800; font-size:14px;">⚠️ WARNING: SYSTEM HAS BEEN COMPROMISED!</span>');
-        }
+            // Tăng cường âm thanh khuếch đại bằng Web Audio API
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
 
-        function closeJumpscare() {
-            const modal = document.getElementById('jumpscare-modal');
-            modal.classList.remove('active');
+                // Đẩy âm lượng tổng thể lên mức 200% (gain = 2.0)
+                gainNode.gain.value = 2.0;
 
-            if (ytPlayer && typeof ytPlayer.pauseVideo === 'function') {
-                ytPlayer.pauseVideo();
-            }
-            if (ytScreamPlayer && typeof ytScreamPlayer.pauseVideo === 'function') {
-                ytScreamPlayer.pauseVideo();
-            }
+                osc.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+            } catch (e) {}
+
+            printLine('<span style="color:#ff4757; font-weight:800; font-size:14px;">⚠️ LOUD AUDIO EXECUTED AT 200% VOLUME!</span>');
         }
     </script>
 </body>
