@@ -7,41 +7,32 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Grotesk:wght@600;700&family=Fira+Code:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
     <!-- File CSS -->
     <link rel="stylesheet" href="style.css">
-    <!-- YouTube IFrame API Script -->
-    <script src="https://www.youtube.com/iframe_api"></script>
 </head>
 <body>
 
     <!-- Canvas Nền Hoa Anh Đào Rơi -->
     <canvas id="sakura-canvas"></canvas>
 
-    <!-- Nút Chuyển Đổi Ngôn Ngữ VI / EN -->
-    <div class="lang-switch-box">
-        <button id="lang-en-btn" class="lang-btn active" onclick="setLanguage('en')">EN</button>
-        <button id="lang-vi-btn" class="lang-btn" onclick="setLanguage('vi')">VI</button>
-    </div>
-
     <!-- Khung Bio Card Chính -->
     <div class="master-card-container" id="master-card-container">
         <main class="master-card" id="master-card">
             
-            <!-- Avatar với Viền Xoay & Bong bóng Chat -->
+            <!-- Avatar Box: Đã xóa ảnh và bong bóng chat, chỉ giữ lại khung tròn xoay -->
             <div class="avatar-box">
                 <div class="avatar-spin-glow"></div>
-                <img src="myfaceplsdontbully.jpg" alt="Nguyễn Hữu Thành" class="avatar-img">
-                <div class="speech-bubble" id="speech-bubble">hi.</div>
+                <div class="avatar-empty-frame"></div>
             </div>
 
             <!-- Tên Cá Nhân -->
-            <h1 class="name">Nguyễn Hữu Thành</h1>
+            <h1 class="name">Hữu Thành</h1>
 
             <!-- NỘI DUNG 1: HOME -->
             <div id="tab-home" class="tab-content active">
                 <div class="small-text-box">
-                    <p id="home-text">Hello, I am Thành. I created this GitHub page to provide you with more information about me and my projects.</p>
+                    <p id="home-text">Welcome to my GitHub Page,Here, I share information about myself and my projects.</p>
                 </div>
             </div>
 
@@ -49,29 +40,20 @@
             <div id="tab-platforms" class="tab-content">
                 <div class="links-flex">
 
-                    <!-- Facebook -->
-                    <a href="https://www.facebook.com/share/1EoYm2aMis/" target="_blank" class="btn-link btn-fb">
-                        <div class="btn-left">
-                            <div class="icon-box"><i class="fab fa-facebook-f"></i></div>
-                            <span class="btn-text">Facebook</span>
-                        </div>
-                        <i class="fas fa-arrow-right arrow-icon"></i>
-                    </a>
-
-                    <!-- TikTok -->
-                    <a href="https://www.tiktok.com/@thanusearch?_r=1&_t=ZS-99h5tcZfva4" target="_blank" class="btn-link btn-tt">
+                    <!-- TikTok (My Uncle TikTok) -->
+                    <a href="https://www.tiktok.com/@abhinavbindra_gu" target="_blank" class="btn-link btn-tt">
                         <div class="btn-left">
                             <div class="icon-box"><i class="fab fa-tiktok"></i></div>
-                            <span class="btn-text">TikTok</span>
+                            <span class="btn-text">My Uncle TikTok</span>
                         </div>
                         <i class="fas fa-arrow-right arrow-icon"></i>
                     </a>
 
-                    <!-- Discord (Copy Username) -->
+                    <!-- Discord (Copy Username 67ass) -->
                     <div class="btn-link btn-dc" onclick="copyDiscordTag()" style="cursor: pointer;">
                         <div class="btn-left">
                             <div class="icon-box"><i class="fab fa-discord"></i></div>
-                            <span class="btn-text" id="dc-text">thanisrightthere</span>
+                            <span class="btn-text" id="dc-text">67ass</span>
                         </div>
                         <span id="copy-badge" class="copy-badge"><i class="far fa-copy"></i></span>
                     </div>
@@ -86,7 +68,7 @@
                     </a>
 
                     <!-- GitHub -->
-                    <a href="https://thanusearch.github.io/ThanUseArch/" target="_blank" class="btn-link btn-gh">
+                    <a href="https://github.com/ThanUseArch/ThanUseArch" target="_blank" class="btn-link btn-gh">
                         <div class="btn-left">
                             <div class="icon-box"><i class="fab fa-github"></i></div>
                             <span class="btn-text">GitHub</span>
@@ -101,37 +83,12 @@
             <div id="tab-info" class="tab-content">
                 <div class="large-text-box">
                     <ul class="info-list">
-                        <li id="info-item-1">Currently, I am studying at Hoang The Thien High School.</li>
-                        <li id="info-item-2">My hobby is programming open-source projects; yes, that is my passion.</li>
-                        <li id="info-item-3">At the same time, I am using a Linux Distro, which is Ubuntu. Maybe at the end of 2026, I will switch to Arch Linux.</li>
-                        <li id="info-item-4">My favorite developer is Linus Torvalds.</li>
+                        <li>Currently, I am studying at Hoang The Thien High School.</li>
+                        <li>My hobby is programming open-source projects; yes, that is my passion.</li>
+                        <li>At the same time, I am using a Linux Distro, which is Ubuntu. Maybe at the end of 2026, I will switch to Arch Linux.</li>
+                        <li>My favorite developer is Linus Torvalds.</li>
                     </ul>
-                    <p class="info-thankyou" id="info-thankyou">If you have any questions about me, feel free to contact me on my platforms. Thank you for visiting!</p>
-                </div>
-
-                <!-- Ô ASCII Art đã căn chỉnh đẹp, không bị tràn viền -->
-                <div class="ascii-wrapper">
-<pre class="ascii-art">
-   _                        _             _   _          
-  (_)                      | |           | | | |         
-   _   _   _ ___  ___  __ _| |__   _ __  | |_| |__   ___ 
-  | | | | | / __|/ _ \/ _` | '__| | '_ \ | __| '_ \ / _ \
-  | | | |_| \__ \  __/ (_| | |    | | | || |_| | | |  __/
-  |_|  \__,_|___/\___|\__,_|_|    |_| |_| \__|_| |_|\___|
-</pre>
-                </div>
-            </div>
-
-            <!-- NỘI DUNG 4: TERMINAL -->
-            <div id="tab-terminal" class="tab-content">
-                <div class="terminal-window" onclick="document.getElementById('terminal-input').focus();">
-                    <div class="terminal-body" id="terminal-body">
-                        <!-- Lịch sử dòng lệnh -->
-                    </div>
-                    <div class="terminal-input-row">
-                        <span class="prompt">thanbio@thanbio:~$</span>
-                        <input type="text" id="terminal-input" autocomplete="off" spellcheck="false">
-                    </div>
+                    <p class="info-thankyou">If you have any questions about me, feel free to contact me on my platforms. Thank you for visiting!</p>
                 </div>
             </div>
 
@@ -142,97 +99,33 @@
         </main>
     </div>
 
-    <!-- PLAYER ÂM THANH TIẾNG HẾT CHẠY NGẦM (KHÔNG DÙNG VIDEO POPUP HÙ DỌA NỮA) -->
-    <div style="display: none; position: absolute; width: 0; height: 0; overflow: hidden;">
-        <div id="yt-scream-player"></div>
-    </div>
-
-    <!-- Thanh Tab Chuyển Mục -->
+    <!-- Thanh Tab Chuyển Mục (Đã xóa Terminal) -->
     <nav class="tab-nav">
         <button class="tab-btn active" onclick="switchTab('home', this)">
-            <i class="fas fa-home"></i> <span id="tab-btn-home">Home</span>
+            <i class="fas fa-home"></i> <span>Home</span>
         </button>
         <button class="tab-btn" onclick="switchTab('platforms', this)">
-            <i class="fas fa-layer-group"></i> <span id="tab-btn-platforms">Platforms</span>
+            <i class="fas fa-layer-group"></i> <span>Platforms</span>
         </button>
         <button class="tab-btn" onclick="switchTab('info', this)">
-            <i class="fas fa-user"></i> <span id="tab-btn-info">Information</span>
-        </button>
-        <button class="tab-btn" onclick="switchTab('terminal', this)">
-            <i class="fas fa-terminal"></i> <span>Terminal</span>
+            <i class="fas fa-user"></i> <span>Information</span>
         </button>
     </nav>
 
     <!-- JavaScript -->
     <script>
-        // Data Ngôn Ngữ VI / EN
-        const translations = {
-            en: {
-                homeText: "Hello, I am Thành. I created this GitHub page to provide you with more information about me and my projects.",
-                info1: "Currently, I am studying at Hoang The Thien High School.",
-                info2: "My hobby is programming open-source projects; yes, that is my passion.",
-                info3: "At the same time, I am using a Linux Distro, which is Ubuntu. Maybe at the end of 2026, I will switch to Arch Linux.",
-                info4: "My favorite developer is Linus Torvalds.",
-                thankyou: "If you have any questions about me, feel free to contact me on my platforms. Thank you for visiting!",
-                tabHome: "Home",
-                tabPlatforms: "Platforms",
-                tabInfo: "Information"
-            },
-            vi: {
-                homeText: "Xin chào tôi là Thành, tôi tạo trang github này để các bạn có thêm các thông tin về tôi và các dự án.",
-                info1: "Hiện tại tôi đang học tại trường trung học phổ thông Hoàng Thế Thiện.",
-                info2: "Tôi có sở thích là lập trình các dự án mã nguồn mở, vâng đó là sở thích của tôi.",
-                info3: "Đồng thời tôi còn đang dùng một Linux Distro, đó chính là Ubuntu. Có lẽ vào cuối năm 2026, tôi sẽ chuyển sang Arch Linux.",
-                info4: "Lập trình viên mà tôi yêu thích nhất là Linus Torvalds.",
-                thankyou: "Nếu bạn có thắc mắc gì về tôi hãy liên hệ các nền tảng của tôi. Cảm ơn vì đã ghé thăm!",
-                tabHome: "Trang chủ",
-                tabPlatforms: "Nền tảng",
-                tabInfo: "Thông tin"
-            }
-        };
-
-        function setLanguage(lang) {
-            const data = translations[lang];
-            
-            document.getElementById('home-text').innerText = data.homeText;
-            document.getElementById('info-item-1').innerText = data.info1;
-            document.getElementById('info-item-2').innerText = data.info2;
-            document.getElementById('info-item-3').innerText = data.info3;
-            document.getElementById('info-item-4').innerText = data.info4;
-            document.getElementById('info-thankyou').innerText = data.thankyou;
-            
-            document.getElementById('tab-btn-home').innerText = data.tabHome;
-            document.getElementById('tab-btn-platforms').innerText = data.tabPlatforms;
-            document.getElementById('tab-btn-info').innerText = data.tabInfo;
-
-            document.getElementById('lang-en-btn').classList.toggle('active', lang === 'en');
-            document.getElementById('lang-vi-btn').classList.toggle('active', lang === 'vi');
-        }
-
-        // Chuyển Tab & Điểu chỉnh kích thước khung linh hoạt
+        // Chuyển Tab
         function switchTab(tabName, btnElement) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
 
             document.getElementById('tab-' + tabName).classList.add('active');
             btnElement.classList.add('active');
-
-            const masterCard = document.getElementById('master-card');
-            const container = document.getElementById('master-card-container');
-
-            if(tabName === 'terminal') {
-                container.classList.add('terminal-size');
-                masterCard.classList.add('terminal-mode');
-                setTimeout(() => document.getElementById('terminal-input').focus(), 100);
-            } else {
-                container.classList.remove('terminal-size');
-                masterCard.classList.remove('terminal-mode');
-            }
         }
 
-        // Copy Username Discord
+        // Copy Username Discord (67ass)
         function copyDiscordTag() {
-            const username = "thanisrightthere";
+            const username = "67ass";
             navigator.clipboard.writeText(username);
             const badge = document.getElementById('copy-badge');
             badge.innerHTML = '<i class="fas fa-check" style="color: #38ef7d;"></i> Copied!';
@@ -240,29 +133,6 @@
                 badge.innerHTML = '<i class="far fa-copy"></i>';
             }, 2000);
         }
-
-        // Bong Bóng Chat
-        const quotes = [
-            "hi.",
-            "open source only",
-            "i use arch btw",
-            "Hell nah",
-            "Thank you,Linus Torvalds"
-        ];
-        
-        const bubble = document.getElementById('speech-bubble');
-        
-        setInterval(() => {
-            bubble.style.opacity = '0';
-            bubble.style.transform = 'translateX(-50%) translateY(5px) scale(0.9)';
-            
-            setTimeout(() => {
-                const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-                bubble.innerText = randomQuote;
-                bubble.style.opacity = '1';
-                bubble.style.transform = 'translateX(-50%) translateY(0) scale(1)';
-            }, 300);
-        }, 4000);
 
         // Canvas Hoa Anh Đào
         const canvas = document.getElementById('sakura-canvas');
@@ -385,112 +255,6 @@
             createWaterRipple(e.clientX, e.clientY);
             playWaterDropSound();
         });
-
-        // XỬ LÝ YOUTUBE PLAYER CHO ÂM THANH TIẾNG HẾT CHẠY NGẦM
-        let ytScreamPlayer = null;
-
-        function onYouTubeIframeAPIReady() {
-            ytScreamPlayer = new YT.Player('yt-scream-player', {
-                height: '1',
-                width: '1',
-                videoId: '5qGKWmhbpNA',
-                playerVars: {
-                    'autoplay': 0,
-                    'controls': 0
-                }
-            });
-        }
-
-        const termInput = document.getElementById('terminal-input');
-        const termBody = document.getElementById('terminal-body');
-
-        termInput.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                const cmd = this.value.trim();
-                if (cmd !== '') {
-                    executeCommand(cmd);
-                }
-                this.value = '';
-            }
-        });
-
-        function printLine(text, isCmd = false) {
-            if (text === null || text === '') return;
-            const line = document.createElement('div');
-            line.className = 'term-line';
-            if (isCmd) {
-                line.innerHTML = `<span class="prompt">thanbio@thanbio:~$</span> ${escapeHtml(text)}`;
-            } else {
-                line.innerHTML = text;
-            }
-            termBody.appendChild(line);
-            
-            const termWindow = document.querySelector('.terminal-window');
-            termWindow.scrollTop = termWindow.scrollHeight;
-        }
-
-        function escapeHtml(text) {
-            return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-        }
-
-        function executeCommand(cmd) {
-            printLine(cmd, true);
-            const lowerCmd = cmd.toLowerCase();
-
-            if (lowerCmd === 'help') {
-                printLine('Available commands: <span class="highlight">fetch</span>, <span class="highlight">play</span>, <span class="highlight">sudo apt install txt</span>, <span class="highlight">clear</span>');
-                printLine('<span class="warn-text">Please contact my platforms for real help</span>');
-            } 
-            else if (lowerCmd === 'fetch') {
-                printLine('Base on GitHub Pages, also ThanUseArch copyright');
-            } 
-            else if (lowerCmd === 'play') {
-                const audio = new Audio('https://www.myinstants.com/media/sounds/faaah.mp3');
-                audio.play().catch(err => {
-                    printLine('<span class="warn-text">Audio playback blocked by browser. Click page to allow audio.</span>');
-                });
-            } 
-            else if (cmd === 'sudo apt install txt') {
-                printLine('Reading package lists... Done');
-                printLine('Building dependency tree... Done');
-                printLine('Reading state information... Done');
-                printLine('Installing: <span class="highlight">txt-audio-scream</span> ...');
-                
-                setTimeout(() => {
-                    triggerScreamAudio();
-                }, 1200);
-            } 
-            else if (lowerCmd === 'clear') {
-                termBody.innerHTML = '';
-            } 
-            else {
-                printLine(`bash: ${escapeHtml(cmd)}: command not found. Type <span class="highlight">help</span> for commands.`);
-            }
-        }
-
-        // PHÁT TIẾNG HẾT CHẠY NGẦM VỚI ÂM LƯỢNG KHUẾCH ĐẠI 200%
-        function triggerScreamAudio() {
-            if (ytScreamPlayer && typeof ytScreamPlayer.playVideo === 'function') {
-                ytScreamPlayer.setVolume(100); // Set volume max YouTube Player
-                ytScreamPlayer.seekTo(0);
-                ytScreamPlayer.playVideo();
-            }
-
-            // Tăng cường âm thanh khuếch đại bằng Web Audio API
-            try {
-                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                const osc = audioCtx.createOscillator();
-                const gainNode = audioCtx.createGain();
-
-                // Đẩy âm lượng tổng thể lên mức 200% (gain = 2.0)
-                gainNode.gain.value = 2.0;
-
-                osc.connect(gainNode);
-                gainNode.connect(audioCtx.destination);
-            } catch (e) {}
-
-            printLine('<span style="color:#ff4757; font-weight:800; font-size:14px;">⚠️ LOUD AUDIO EXECUTED AT 200% VOLUME!</span>');
-        }
     </script>
 </body>
 </html>
