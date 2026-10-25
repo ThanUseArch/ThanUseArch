@@ -61,42 +61,6 @@ body {
     }
 }
 
-/* Nút Chuyển Ngôn Ngữ */
-.lang-switch-box {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 100;
-    display: flex;
-    gap: 4px;
-    background: rgba(255, 255, 255, 0.65);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    padding: 4px;
-    border-radius: 14px;
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-}
-
-.lang-btn {
-    border: none;
-    background: transparent;
-    padding: 6px 12px;
-    border-radius: 10px;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 12px;
-    font-weight: 800;
-    color: #4a5568;
-    cursor: pointer;
-    transition: all 0.25s ease;
-}
-
-.lang-btn.active {
-    background: #ffffff;
-    color: #2b2d42;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
 /* Master Card Container */
 .master-card-container {
     position: relative;
@@ -105,11 +69,6 @@ body {
     max-width: 480px; 
     padding: 1px;
     border-radius: 30px;
-    transition: max-width 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-}
-
-.master-card-container.terminal-size {
-    max-width: 720px;
 }
 
 .master-card {
@@ -122,18 +81,9 @@ body {
     text-align: center;
     box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08),
                 0 10px 20px rgba(255, 255, 255, 0.4) inset;
-    transition: background 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
 }
 
-.master-card.terminal-mode {
-    background: transparent;
-    border-color: transparent;
-    box-shadow: none;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-}
-
-/* Avatar Box */
+/* Khung Avatar Tròn Đẩy Về Dạng Rỗng + Viền Xoay Glow */
 .avatar-box {
     position: relative;
     width: 115px;
@@ -164,47 +114,15 @@ body {
     100% { transform: rotate(360deg); }
 }
 
-.avatar-img {
+.avatar-empty-frame {
     position: relative;
     z-index: 2;
     width: 107px;
     height: 107px;
     border-radius: 50%;
-    object-fit: cover;
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(10px);
     border: 3px solid #ffffff;
-}
-
-/* Bong bóng Chat */
-.speech-bubble {
-    position: absolute;
-    top: -26px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
-    background: #ffffff;
-    color: #2b2d42;
-    padding: 6px 14px;
-    border-radius: 12px;
-    font-size: 13px;
-    font-weight: 800;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.9);
-    white-space: nowrap;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    pointer-events: none;
-}
-
-.speech-bubble::after {
-    content: '';
-    position: absolute;
-    bottom: -6px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 6px solid #ffffff;
 }
 
 /* Tên Cá Nhân */
@@ -228,7 +146,7 @@ body {
     justify-content: center;
     gap: 6px;
     width: 92%;
-    max-width: 540px;
+    max-width: 480px;
     background: rgba(255, 255, 255, 0.65);
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
@@ -395,126 +313,10 @@ body {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
 }
 
-.btn-fb:hover .icon-box { background: #1877f2; color: #fff; }
 .btn-tt:hover .icon-box { background: #000000; color: #fff; }
 .btn-dc:hover .icon-box { background: #5865f2; color: #fff; }
 .btn-em:hover .icon-box { background: #ea4335; color: #fff; }
 .btn-gh:hover .icon-box { background: #24292e; color: #fff; }
-
-/* Ô ASCII ART CĂN CHỈNH NỔI BẬT & CHUẨN ĐẸP */
-.ascii-wrapper {
-    margin-top: 18px;
-    padding: 14px 10px;
-    background: rgba(20, 24, 38, 0.92);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    overflow-x: auto;
-}
-
-.ascii-art {
-    font-family: 'Fira Code', 'Courier New', monospace;
-    font-size: 8.5px;
-    line-height: 1.25;
-    font-weight: 700;
-    color: #fecfef;
-    text-shadow: 0 0 8px rgba(254, 207, 239, 0.6);
-    white-space: pre;
-    text-align: center;
-    display: inline-block;
-    margin: 0 auto;
-}
-
-@media (min-width: 480px) {
-    .ascii-art {
-        font-size: 10px;
-    }
-}
-
-/* TERMINAL WINDOW */
-.terminal-window {
-    background: rgba(18, 18, 30, 0.35);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1.5px solid rgba(255, 255, 255, 0.35);
-    border-radius: 20px;
-    padding: 22px 24px;
-    text-align: left;
-    font-family: 'Fira Code', monospace;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
-    cursor: text;
-    transition: all 0.3s ease;
-    height: 380px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-.terminal-body {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    font-size: 14px;
-    color: #f8fafc;
-}
-
-.term-line {
-    word-break: break-all;
-    line-height: 1.5;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.prompt {
-    color: #38ef7d;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 1.5;
-    white-space: nowrap;
-    text-shadow: 0 0 8px rgba(56, 239, 125, 0.3);
-}
-
-.highlight {
-    color: #93c5fd;
-    font-weight: 700;
-}
-
-.warn-text {
-    color: #fca5a5;
-    font-style: italic;
-}
-
-.terminal-input-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-#terminal-input {
-    flex: 1;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: #ffffff;
-    font-family: 'Fira Code', monospace;
-    font-size: 14px;
-    line-height: 1.5;
-    font-weight: 500;
-}
-
-.terminal-window::-webkit-scrollbar {
-    width: 5px;
-}
-.terminal-window::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 4px;
-}
 
 /* Footer */
 footer {
